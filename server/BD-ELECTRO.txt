@@ -1,0 +1,113 @@
+
+ bands:  [ 
+    {"id": 1, "title": "APPLE"},
+    {"id": 2, "title": "ASUS"},
+    {"id": 3, "title": "HP"},
+    {"id": 4, "title": "LENOVO"},
+    {"id": 5, "title": "MSI"},
+
+    # MOBILE PHONE 5
+    {"id": 6, "title": "HTC"},
+    {"id": 7, "title": "SAMSUNG"},
+    {"id": 8, "title": "XIAOMI"},
+    {"id": 9, "title": "MOTOROLA"},
+
+    # Écran 6
+    {"id": 11, "title": "AOC"},
+    {"id": 13, "title": "IIYAMA"},
+
+    #casque
+    {"id": 15, "title": "CORSAIR"},
+    {"id": 16, "title": "LOGITECH G"},
+    {"id": 17, "title": "RAZER"},
+    {"id": 18, "title": "ROCCAT"},
+    {"id": 19, "title": "STEELSERIES"},
+
+    ]
+
+category: [
+    {"id": 1, "title": "Netbooks"},
+    {"id": 2, "title": "Tablets"},
+    {"id": 3, "title": "Desktop Laptops"},
+     
+     #  Mobile phone
+    {"id": 4, "title": "Iphone Apple"},
+    {"id": 5, "title": "SmartPhone Android"},
+
+    # Écran PC
+    {"id": 6, "title": "22 pouces"},
+    {"id": 7, "title": "24 pouces"},
+    {"id": 8, "title": "27 pouces"},
+    {"id": 9, "title": "32 pouces"},
+
+    #casque
+    {"id": 10, "title": "Intra-Auriculaire"},
+    {"id": 11, "title": "Micro-Casque"},
+   
+]
+
+collection:[
+    {
+        "id": 1, "title": "Laptop"
+    },
+    {
+        "id": 2, "title": "Mobile phone"
+    },
+    {
+        "id": 3, "title": "Screen PC"
+    },
+    {
+        "id": 4, "title": "Casque sans fil"
+    },
+]
+  
+
+
+
+COLLECTION
+  Laptop
+    CATEGORIES:
+      Ultrabooks
+      Netbooks
+      Tablets
+      Desktop Laptops
+    MARQUE:
+     APPLE, ASUS, HP, LENOVO, MSI
+
+
+
+  Mobile phone
+    CATEGORIES:
+      Iphone Apple
+      SmartPhone Android
+    MARQUE:
+      HTC
+      Apple iPhone
+      Samsung
+      XIAOMI
+      MOTOROLA
+     
+  Écran PC
+    CATEGORIES:
+      22 pouces
+      24 pouces
+      27 pouces
+      32 pouces
+  
+    MARQUE:
+      AOC
+      iiyama
+      SAMSUNG
+
+  Casque sans fil
+  CATEGORIES:
+    Intra-Auriculaire
+    Micro-Casque
+   
+  MARQUES:
+    ASUS
+    CORSAIR
+    LOGITECH G
+    RAZER
+    ROCCAT
+    STEELSERIES

@@ -12,7 +12,7 @@ import { Dispatch } from 'react'
 const dataFilterBy: CommonType[] = [
   { id: '3', title: 'Prix croissant', slug: SortTypeEnum.PRICE_ASC },
   { id: '4', title: 'Prix décroissant', slug: SortTypeEnum.PRICE_DESC },
-  { id: '5', title: 'Les mieux notés', slug: SortTypeEnum.RATING_ASC }
+  { id: '5', title: 'Les mieux notés', slug: SortTypeEnum.RATING_DESC }
 ]
 
 export default function FilterSelect({

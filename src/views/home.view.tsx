@@ -10,11 +10,6 @@ import { useGetAllCollectionsQuery } from '@/services/collections.service'
 
 function Home() {
   const { data: collections } = useGetAllCollectionsQuery()
-  const date1 = dayjs('2019-01-25')
-  const date2 = dayjs('2018-06-05')
-  date1.diff(date2, 'month') // 20214000000 de
-  console.log('diff: ', date1.diff(date2, 'month'))
-
   return (
     <>
       <div>
@@ -26,7 +21,7 @@ function Home() {
             <div className="flex flex-wrap -mx-4">
               {/* <!-- shop --> */}
               <Collection
-                category={{ title: 'Laptop', img: 'img/shop01.png', id: 1 }}
+                category={{ title: 'Laptop', img: '/img/shop01.png', id: 1 }}
               ></Collection>
               {/* <!-- /shop --> */}
 
@@ -34,7 +29,7 @@ function Home() {
               <Collection
                 category={{
                   title: 'Accessories',
-                  img: 'img/shop03.png',
+                  img: '/img/shop03.png',
                   id: 2
                 }}
               ></Collection>
@@ -42,7 +37,7 @@ function Home() {
 
               {/* <!-- shop --> */}
               <Collection
-                category={{ title: 'Cameras', img: 'img/shop02.png', id: 2 }}
+                category={{ title: 'Cameras', img: '/img/shop02.png', id: 2 }}
               ></Collection>
               {/* <!-- /shop --> */}
             </div>

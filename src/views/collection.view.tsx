@@ -1,40 +1,22 @@
 import { DefaultRcSlider } from '@/components/defaultRcSlider.omponent'
 import FilterSelect from '@/components/filter-select.component'
 import { RadioGroupSelect } from '@/components/forms/RadioGroupSelect'
-import { LocalPagination } from '@/components/local-pagination.component'
 import ProductLineCard from '@/components/products/product-line-card.component'
 import { useFormatQueryParams } from '@/hooks/useFormatQueryParams'
-import {
-  CollectionType,
-  CommonType,
-  PaginateData,
-  ProductType,
-  SortTypeEnum
-} from '@/interfaces/global.interface'
+import { SortTypeEnum } from '@/interfaces/global.interface'
 import { useGetCollectionBySlugQuery } from '@/services/collections.service'
 import { useGetProductsByCollectionFilterQuery } from '@/services/products.service'
 import { paginateTheme } from '@/utils/tailwind.theme'
-import { useMountedState, useUpdateEffect } from '@reactuses/core'
+import { useUpdateEffect } from '@reactuses/core'
 import { Pagination } from 'flowbite-react'
-import { useEffect, useRef, useState } from 'react'
-import { useLoaderData, useNavigate, useParams } from 'react-router'
-import {
-  createSearchParams,
-  Link,
-  ParamKeyValuePair,
-  useSearchParams
-} from 'react-router-dom'
+import { useRef, useState } from 'react'
+import { useParams } from 'react-router'
+import { createSearchParams, Link, useSearchParams } from 'react-router-dom'
 
 function Collection() {
-  const isMounted = useMountedState()
   let [searchParams, setSearchParams] = useSearchParams()
   const { collectionSlug } = useParams()
 
-  // const loaderData = useLoaderData() as [
-  //   PaginateData<ProductType>,
-  //   CollectionType
-  // ]
-  const navigate = useNavigate()
   const { data: collection } = useGetCollectionBySlugQuery(collectionSlug!, {})
   const {
     data: paginated,
@@ -44,7 +26,7 @@ function Collection() {
     params: collectionSlug!,
     searchParams: searchParams.size > 0 ? searchParams.toString() : '_limit=9'
   })
-  // const products = loaderData[0].data
+
   const countProducts = paginated?.count
   const urlQueryParams = Array.from(searchParams.entries())
 
@@ -126,18 +108,16 @@ function Collection() {
 
   const categoryList = () => {
     return collection!.categories.map((categorie) => (
-      <div
-        key={categorie.id}
-        className="px-2 py-[10px] hover:bg-gray-300 transition"
-      >
-        <Link to={`/${collectionSlug}/${categorie.slug}`}>
+      <Link className="text-sm" to={`/${collectionSlug}/${categorie.slug}`}>
+        <div
+          key={categorie.id}
+          className="px-2 py-[10px] hover:bg-gray-300 transition"
+        >
           {categorie.title}
-        </Link>
-      </div>
+        </div>
+      </Link>
     ))
   }
-
-  useFormatQueryParams
 
   useUpdateEffect(() => {
     setSearchParams(
@@ -172,58 +152,7 @@ function Collection() {
         unstable_viewTransition: true
       }
     )
-
-    // navigate(
-    //   {
-    //     pathname: `/collection/${collectionSlug}`,
-    //     search: `?${createSearchParams(formatQueryParams())}`
-    //   },
-    //   {
-    //     unstable_viewTransition: true
-    //     // replace: true
-    //   }
-    // )
   }, [selectedBrands, minMax])
-
-  // const formatQueryParams = (): ParamKeyValuePair[] => {
-  //   let filterObj = []
-  //   const sortData = selectedFilterBy?.split('_')
-
-  //   const obj = {
-  //     brandSlugs: selectedBrands.map((brand) => {
-  //       return ['brand.slug', brand]
-  //     }),
-  //     minMax:
-  //       minMax.length != 0
-  //         ? [
-  //             ['price_gte', minMax[0]],
-  //             ['price_lte', minMax[1]]
-  //           ]
-  //         : null,
-  //     sort:
-  //       sortData != null
-  //         ? [
-  //             ['_sort', sortData[0]],
-  //             ['_order', sortData[1]]
-  //           ]
-  //         : null,
-  //     page: [['_page', page.current]],
-  //     limit: [['_limit', 9]]
-  //   }
-  //   for (var propName in obj) {
-  //     if (
-  //       //@ts-ignore
-  //       obj[propName] == null ||
-  //       //@ts-ignore
-  //       (Array.isArray(obj[propName]) && obj[propName].length === 0)
-  //     ) {
-  //       //@ts-ignore
-  //       delete obj[propName]
-  //     }
-  //   }
-
-  //   return extractSubObjects(obj)
-  // }
 
   const showResult = () => {
     if (isFetching) {
@@ -254,10 +183,10 @@ function Collection() {
     <div>
       <div className="centerContent">
         <main className="grid grid-cols-4 gap-x-4 ">
-          <section className="col-span-1 h-[calc(100%-30px)] mt-[15px]">
-            <h3 className="title text-xl font-bold">CATEGORIES</h3>
-            {categoryList()}
-            <h3 className="title text-xl font-bold">MARQUES</h3>
+          <section className="col-span-1 h-[calc(100%-30px)] mt-[10px]">
+            <h3 className="title text-md font-bold">CATEGORIES</h3>
+            <div className="my-2">{categoryList()}</div>
+            <h3 className="title text-md font-bold">MARQUES</h3>
             <RadioGroupSelect
               selectedBrands={selectedBrands}
               setSelectedBrands={setSelectedBrands}
@@ -298,7 +227,7 @@ function Collection() {
             {/*END  LIST ARTICLES */}
             <article className="flex justify-center">
               {/* <LocalPagination></LocalPagination> */}
-              {isSuccess && (
+              {isSuccess && countProducts != null && countProducts > 9 && (
                 <Pagination
                   layout="pagination"
                   currentPage={page.current}

@@ -73,7 +73,8 @@ export const DefaultRcSlider = ({
           onChange={updateMin}
           value={min}
           min={defaultMin}
-          className="shadow appearance-none border rounded w-full py-2 px-3 
+          className="shadow appearance-none border rounded w-full py-2 px-3
+          text-sm 
           text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="username"
           type="number"
@@ -85,6 +86,7 @@ export const DefaultRcSlider = ({
           value={max}
           min={defaultMax}
           className="shadow appearance-none border rounded w-full py-2 px-3 
+          text-sm
         text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="username"
           type="number"

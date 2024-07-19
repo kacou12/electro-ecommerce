@@ -1,14 +1,14 @@
 import { Navigation } from '@/components/globals/navigation.component'
 import { Newsletter } from '@/components/globals/newsletter.component'
-import React, { ReactNode } from 'react'
-import { Outlet } from 'react-router'
-import { Header } from './globals/header.component'
-import { Footer } from './globals/footer'
-import { Breadcrumbs } from './globals/breadcrumbs.component'
-import { useGetAllCollectionsQuery } from '@/services/collections.service'
+import { RouteEnum } from '@/routes/route.enum'
+import { Outlet, useLocation } from 'react-router'
 import { ScrollRestoration } from 'react-router-dom'
+import { Breadcrumbs } from './globals/breadcrumbs.component'
+import { Footer } from './globals/footer'
+import { Header } from './globals/header.component'
 
 export default function App() {
+  const { pathname } = useLocation()
   return (
     <>
       <ScrollRestoration />
@@ -21,7 +21,7 @@ export default function App() {
       {/* <!-- END NAVIGATION --> */}
 
       {/* BREADCRUMB */}
-      <Breadcrumbs></Breadcrumbs>
+      {pathname != RouteEnum.DEFAULT && <Breadcrumbs></Breadcrumbs>}
       {/* END BREADCRUMB */}
 
       {/* CHILDREN */}

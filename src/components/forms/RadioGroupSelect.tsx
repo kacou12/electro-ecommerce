@@ -25,23 +25,24 @@ function RadioGroupSelect({
 
   return (
     <>
-      <div className="space-y-4">
+      <div className="space-y-4 my-2">
         {brands.map((brand) => {
           let checked = selectedBrands.includes(brand.slug)
           return (
-            <Field key={brand.id} className="flex items-center gap-4 border ">
+            <Field key={brand.id} className="flex items-center gap-4  ">
               <Checkbox
                 refName={brand.id}
                 checked={checked}
                 onClick={() => changeCheckBox(brand.slug)}
                 className={`
                   ${checked && 'ring-primary'} 
-                  group size-6 rounded border bg-white
+                  group size-5 rounded border bg-white
                   ring-0
                   data-[checked]:ring-1
                   outline-none
                   ring-inset
                   flex justify-center items-center
+                  
                 `}
               >
                 <CheckIcon
@@ -53,7 +54,9 @@ function RadioGroupSelect({
                 />
               </Checkbox>
 
-              <Label>{brand.title}</Label>
+              <Label className="text-sm cursor-pointer  w-full">
+                {brand.title}
+              </Label>
             </Field>
           )
         })}

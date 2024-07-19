@@ -18,18 +18,7 @@ export const collectionLoader = async ({
         params['collectionSlug']!
       )
     )
-
-    // const fetchProductFilter = store.dispatch(
-    //   productApi.endpoints.getProductsByCollectionFilter.initiate({
-    //     params: params['collectionSlug']!,
-    //     searchParams:
-    //       url.searchParams.size > 0 ? url.searchParams.toString() : '_limit=9'
-    //   })
-    // )
-    const response = await Promise.all([
-      // fetchProductFilter.unwrap(),
-      fetchingCollection.unwrap()
-    ])
+    const response = await Promise.all([fetchingCollection.unwrap()])
     return response
   } catch (e) {
     throw new Response('Not Found', { status: 404 })

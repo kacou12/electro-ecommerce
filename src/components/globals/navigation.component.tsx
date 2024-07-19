@@ -1,14 +1,9 @@
 import { RouteEnum } from '@/routes/route.enum'
 import { useGetAllCollectionsQuery } from '@/services/collections.service'
-import React from 'react'
-import { Link, useLoaderData, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 
 export const Navigation = () => {
-  const {
-    data: collections,
-    isFetching,
-    isSuccess
-  } = useGetAllCollectionsQuery()
+  const { data: collections } = useGetAllCollectionsQuery()
   const { collectionSlug } = useParams()
   const { pathname } = useLocation()
 
@@ -20,7 +15,7 @@ export const Navigation = () => {
       >
         <Link
           reloadDocument={true}
-          to={`/collection/${collection.slug}`}
+          to={`/${collection.slug}`}
           className="text-header"
         >
           {collection.title}

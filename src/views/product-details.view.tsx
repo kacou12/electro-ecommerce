@@ -101,7 +101,7 @@ export default function ProductDetails() {
 
                 {/* <!-- Product tab --> */}
                 <div className="col-span-12">
-                  <ProductTabs></ProductTabs>
+                  {/* <ProductTabs></ProductTabs> */}
                 </div>
                 {/* <!-- /product tab --> */}
               </div>

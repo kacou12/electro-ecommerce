@@ -1,4 +1,9 @@
-import { CommonType, CollectionType } from '@/interfaces/global.interface'
+import {
+  CommonType,
+  CollectionType,
+  CategoryType,
+  BrandType
+} from '@/interfaces/global.interface'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 // Define a service using a base URL and expected endpoints
@@ -8,6 +13,10 @@ export const collectionApi = createApi({
   endpoints: (builder) => ({
     getAllCollections: builder.query<CollectionType[], void>({
       query: () => `collections`
+      //   Types:
+    }),
+    getAllBrands: builder.query<BrandType[], void>({
+      query: () => `brands`
       //   Types:
     }),
     getCollectionBySlug: builder.query<CollectionType, string>({
@@ -26,5 +35,8 @@ export const collectionApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllCollectionsQuery, useGetCollectionBySlugQuery } =
-  collectionApi
+export const {
+  useGetAllCollectionsQuery,
+  useGetCollectionBySlugQuery,
+  useGetAllBrandsQuery
+} = collectionApi

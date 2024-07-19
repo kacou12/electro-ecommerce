@@ -2,6 +2,7 @@ export interface ProductType {
   id: string
   title: string
   subtitle: string
+  slug: string
   price: number
   collection: CollectionType
   category: CommonType
@@ -17,7 +18,7 @@ export interface ProductType {
 export enum SortTypeEnum {
   PRICE_ASC = 'price_asc',
   PRICE_DESC = 'price_desc',
-  RATING_ASC = 'rating_asc'
+  RATING_DESC = 'rating_desc'
 }
 export interface QueryData {
   params: string

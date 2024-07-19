@@ -82,10 +82,10 @@ export const ProductDetailSlick = () => {
             {...settings}
             className="h-full vertical-slick"
           >
-            <div>{card('img/product01.png', 1)}</div>
-            <div>{card('img/product03.png', 2)}</div>
-            <div>{card('img/product06.png', 3)}</div>
-            <div>{card('img/product08.png', 4)}</div>
+            <div>{card('/img/product01.png', 1)}</div>
+            <div>{card('/img/product03.png', 2)}</div>
+            <div>{card('/img/product06.png', 3)}</div>
+            <div>{card('/img/product08.png', 4)}</div>
           </Slider>
           {customArrowDown()}
         </section>
@@ -101,10 +101,10 @@ export const ProductDetailSlick = () => {
             ref={(slider1) => setNav1(slider1)}
             className="h-full horizontal-slick"
           >
-            <div>{wideCard('img/product01.png', 1)}</div>
-            <div>{wideCard('img/product03.png', 2)}</div>
-            <div>{wideCard('img/product06.png', 3)}</div>
-            <div>{wideCard('img/product08.png', 4)}</div>
+            <div>{wideCard('/img/product01.png', 1)}</div>
+            <div>{wideCard('/img/product03.png', 2)}</div>
+            <div>{wideCard('/img/product06.png', 3)}</div>
+            <div>{wideCard('/img/product08.png', 4)}</div>
           </Slider>
         </section>
         {/*END  SLIDE ROW */}

@@ -1,14 +1,12 @@
-import { createBrowserRouter, Link, redirect } from 'react-router-dom'
-import { RouteEnum } from './route.enum'
+// import HotDeals from '@/views/hot-deals.view'
 import { lazy } from 'react'
-import HotDeals from '@/views/hot-deals.view'
+import { createBrowserRouter } from 'react-router-dom'
+import { RouteEnum } from './route.enum'
 // import { useQuery } from '@tanstack/react-query'
-import { collectionApi } from '@/services/collections.service'
-import { store } from '@/store'
 import { PageError } from '@/views/page-error'
+import { categoryLoader } from './loaders/category.loader'
 import { collectionLoader } from './loaders/collection.loader'
 import { homeLoader } from './loaders/home.loader'
-import { categoryLoader } from './loaders/category.loader'
 import { hotDealLoader } from './loaders/hotdeal.loader'
 // import Collection from '@/views/collection.view'
 
@@ -17,7 +15,8 @@ const Home = lazy(() => import('@/views/home.view'))
 const App = lazy(() => import('@/components/App'))
 const Category = lazy(() => import('@/views/category.view'))
 const Collection = lazy(() => import('@/views/collection.view'))
-const Hotdeals = lazy(() => import('@/views/hot-deals.view'))
+const HotDeals = lazy(() => import('@/views/hot-deals.view'))
+const Search = lazy(() => import('@/views/search.view'))
 
 const Test = lazy(() => import('@/views/Test.view'))
 
@@ -52,10 +51,15 @@ export const router = createBrowserRouter([
         path: RouteEnum.PRODUCT_DETAILS,
         element: <ProductDetails></ProductDetails>
       },
+
       {
         path: RouteEnum.HOTDEALS,
-        element: <HotDeals></HotDeals>,
-        loader: hotDealLoader
+        element: <HotDeals></HotDeals>
+        // loader: hotDealLoader
+      },
+      {
+        path: RouteEnum.SEARCH,
+        element: <Search></Search>
       }
     ]
   }

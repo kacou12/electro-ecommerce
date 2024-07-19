@@ -1,8 +1,9 @@
 export enum RouteEnum {
   DEFAULT = '/',
   TEST = '/category',
+  COLLECTION = '/:collectionSlug',
   CATEGORY = '/:collectionSlug/:categorySlug',
-  COLLECTION = '/collection/:collectionSlug',
-  PRODUCT_DETAILS = '/product/:productSlug',
-  HOTDEALS = '/hotdeals'
+  PRODUCT_DETAILS = '/:collectionSlug/:categorySlug/:productSlug',
+  HOTDEALS = '/hotdeals',
+  SEARCH = '/search'
 }

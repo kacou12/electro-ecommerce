@@ -4,7 +4,6 @@ import {
   ProductType,
   QueryData
 } from '@/interfaces/global.interface'
-import { shuffle } from '@/utils/index.utils'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 // Define a service using a base URL and expected endpoints
@@ -16,11 +15,37 @@ export const productApi = createApi({
   endpoints: (builder) => ({
     getProductBySlug: builder.query<ProductType, string>({
       query: (slug) => `products/?slug=${slug}`,
+
       transformResponse: (response: ProductType[], meta, arg) => response[0]
       //   Types:
     }),
     getAllProducts: builder.query<ProductType[], void>({
       query: () => `products?_limit=1`
+      //   Types:
+    }),
+    getSearchLimitedProducts: builder.query<PaginateData<ProductType>, string>({
+      query: (search) => `products?title_like=${search}&_limit=9&_page=1`,
+      transformResponse: (response: ProductType[], meta, arg) => {
+        return {
+          data: response,
+          count: Number(meta!.response!.headers.get('X-Total-Count'))
+        }
+      }
+      //   Types:
+    }),
+    getSearchProducts: builder.query<PaginateData<ProductType>, string>({
+      query: (search) => {
+        if (search.includes('_limit')) {
+          return `products?${search}`
+        }
+        return `products?${search}&_limit=9`
+      },
+      transformResponse: (response: ProductType[], meta, arg) => {
+        return {
+          data: response,
+          count: Number(meta!.response!.headers.get('X-Total-Count'))
+        }
+      }
       //   Types:
     }),
     getProductsByCollectionSlug: builder.query<ProductType[], string>({
@@ -36,8 +61,20 @@ export const productApi = createApi({
         return `products?collection.slug=${data.params}&${data.searchParams}`
       },
       transformResponse: (response: ProductType[], meta, arg) => {
-        // console.log(Number(meta?.response?.headers.get('X-Total-Count')))
-
+        return {
+          data: response,
+          count: Number(meta!.response!.headers.get('X-Total-Count'))
+        }
+      }
+    }),
+    getProductsByCategoryFilter: builder.query<
+      PaginateData<ProductType>,
+      QueryData
+    >({
+      query: (data) => {
+        return `products?category.slug=${data.params}&${data.searchParams}`
+      },
+      transformResponse: (response: ProductType[], meta, arg) => {
         return {
           data: response,
           count: Number(meta!.response!.headers.get('X-Total-Count'))
@@ -49,7 +86,7 @@ export const productApi = createApi({
       string
     >({
       query: (searchParams) => {
-        return `products?reduction_gte=40${searchParams}`
+        return `products?reduction=60&reduction=70&reduction=808reduction=90&${searchParams}`
       },
       transformResponse: (response: ProductType[], meta, arg) => {
         return {
@@ -72,6 +109,7 @@ export const productApi = createApi({
     ),
     getTopSellingProductsByCategorySlug: builder.query<ProductType[], string>({
       extraOptions: {},
+
       query: (slugCategory) =>
         `products?rating_gte=4&_limit=10&category.slug=${slugCategory}`
       // transformResponse: (response: ProductType[], meta, arg) =>
@@ -86,7 +124,11 @@ export const {
   useGetNewProductsByCollectionSlugQuery,
   useGetProductsByCollectionFilterQuery,
   useGetProductBySlugQuery,
+  useGetProductsByCategoryFilterQuery,
   useGetAllProductsQuery,
+  useGetSearchLimitedProductsQuery,
+  useGetSearchProductsQuery,
+  useLazyGetSearchLimitedProductsQuery,
   useGetProductsByHotDealFilterQuery,
   useGetTopSellingProductsByCategorySlugQuery,
   useGetTopSellingProductsByCollectionSlugQuery,

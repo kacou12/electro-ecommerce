@@ -5,6 +5,7 @@ import { IoCartOutline } from 'react-icons/io5'
 import { CartDropdown } from '../cart/cart-dropdown'
 import { Link } from 'react-router-dom'
 import { RouteEnum } from '@/routes/route.enum'
+import { SearchBar } from '../searchbar'
 
 export const Header = () => {
   return (
@@ -66,22 +67,7 @@ export const Header = () => {
 
               {/* <!-- SEARCH BAR --> */}
               <div className="w-full md:w-1/2 lg:w-2/4">
-                <div className="header-search">
-                  <form className="flex items-center">
-                    <select className="input-select bg-white text-gray-700 py-2 px-4 rounded-l">
-                      <option value="0">All Categories</option>
-                      <option value="1">Category 01</option>
-                      <option value="1">Category 02</option>
-                    </select>
-                    <input
-                      className="input bg-white text-gray-700 py-2 px-4 flex-grow"
-                      placeholder="Search here"
-                    />
-                    <button className="search-btn bg-blue-500 text-white py-2 px-4 rounded-r">
-                      Search
-                    </button>
-                  </form>
-                </div>
+                <SearchBar></SearchBar>
               </div>
               {/* <!-- /SEARCH BAR --> */}
 

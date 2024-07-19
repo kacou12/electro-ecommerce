@@ -1,8 +1,5 @@
-import { collectionApi } from '@/services/collections.service'
 import { productApi } from '@/services/products.service'
 import { store } from '@/store'
-import React from 'react'
-import { Params } from 'react-router'
 
 export const hotDealLoader = async ({ request }: { request: Request }) => {
   const url = new URL(request.url)

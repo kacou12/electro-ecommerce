@@ -15,6 +15,31 @@ export interface ProductType {
   details: string
   createdAt: Date
 }
+
+export interface CommentType {
+  id: string
+  fullName: string
+  message: string
+  createdAt: Date
+  rate: number
+  productSlug: string
+}
+export interface NullableCommentType {
+  id?: string
+  fullName: string
+  message: string
+  createdAt?: Date
+  rate: number
+  productSlug: string
+}
+export interface User {
+  id: string
+  firstName: string
+  lastName: string
+  favorites: number[]
+  phone: string
+  email: string
+}
 export enum SortTypeEnum {
   PRICE_ASC = 'price_asc',
   PRICE_DESC = 'price_desc',

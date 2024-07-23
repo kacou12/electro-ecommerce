@@ -10,18 +10,16 @@ import {
 } from '@headlessui/react'
 import { useUpdateEffect } from '@reactuses/core'
 import { Button, Spinner } from 'flowbite-react'
-import { Fragment, useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Fragment, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const SearchBar = () => {
   const [selectedPerson, setSelectedPerson] = useState('')
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
-  const isVisible = useRef(false)
-  const closeRef = useRef<HTMLDivElement | null>(null)
-  const [trigger, result, lastPromiseInfo] =
+  const [trigger, { data: paginated, isFetching, isSuccess }] =
     useLazyGetSearchLimitedProductsQuery()
-  const { data: paginated, isFetching, isSuccess } = result
+  // const { data: paginated, isFetching, isSuccess } = result
   const products = paginated?.data
   const count = paginated?.count
   const goSearchPage = () => {
@@ -35,7 +33,7 @@ export const SearchBar = () => {
   const goToDetailPage = (product: ProductType) => {
     setTimeout(() => {
       navigate(
-        `${product.collection.slug}/${product.category.slug}/${product.slug}`
+        `/${product.collection.slug}/${product.category.slug}/${product.slug}`
       )
     }, 500)
   }

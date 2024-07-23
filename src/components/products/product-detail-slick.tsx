@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io'
 import Slider, { Settings } from 'react-slick'
 
-export const ProductDetailSlick = () => {
+export const ProductDetailSlick = ({ imgs }: { imgs: string[] }) => {
   const [nav1, setNav1] = useState<Slider | undefined>()
   const [nav2, setNav2] = useState<Slider | undefined>()
 
@@ -21,19 +21,24 @@ export const ProductDetailSlick = () => {
     // autoplay: true,,
   }
 
-  const card = (text: string, index: number) => {
+  const card = (text: string) => {
     return (
       <div className="h-[169px] img-slick border-2 border-gray-200 bg-white text-white  flex justify-center items-center ">
-        <img className="w-full h-full" src={text} alt="" />
+        <img
+          className="w-full h-full"
+          data-src-large={text}
+          src={text}
+          alt=""
+        />
         {/* {index} */}
       </div>
     )
   }
-  const wideCard = (text: string, index: number) => {
+  const wideCard = (text: string) => {
+    const imgText = text.replace('r150', 'r900')
     return (
       <div className="h-[525px] bg-white text-white  flex justify-center items-center ">
-        <img className="" src={text} alt="" />
-        {index}
+        <img className="object-contain w-[90%] h-[90%]" src={imgText} alt="" />
       </div>
     )
   }
@@ -82,10 +87,9 @@ export const ProductDetailSlick = () => {
             {...settings}
             className="h-full vertical-slick"
           >
-            <div>{card('/img/product01.png', 1)}</div>
-            <div>{card('/img/product03.png', 2)}</div>
-            <div>{card('/img/product06.png', 3)}</div>
-            <div>{card('/img/product08.png', 4)}</div>
+            {imgs.map((img) => {
+              return <div key={img}>{card(img)}</div>
+            })}
           </Slider>
           {customArrowDown()}
         </section>
@@ -101,10 +105,9 @@ export const ProductDetailSlick = () => {
             ref={(slider1) => setNav1(slider1)}
             className="h-full horizontal-slick"
           >
-            <div>{wideCard('/img/product01.png', 1)}</div>
-            <div>{wideCard('/img/product03.png', 2)}</div>
-            <div>{wideCard('/img/product06.png', 3)}</div>
-            <div>{wideCard('/img/product08.png', 4)}</div>
+            {imgs.map((img) => {
+              return <div key={img}>{wideCard(img)}</div>
+            })}
           </Slider>
         </section>
         {/*END  SLIDE ROW */}

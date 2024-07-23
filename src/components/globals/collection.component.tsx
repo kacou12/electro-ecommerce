@@ -1,17 +1,21 @@
-import { Category } from '@/interfaces/global.interface'
+import { CollectionType } from '@/interfaces/global.interface'
 
-export function Collection({ category }: { category: Category }) {
+export function Collection({ collection }: { collection: CollectionType }) {
   return (
     <>
       {/* <!-- shop --> */}
       <div className="w-full md:w-1/3 px-4 mb-8">
         <div className="shop">
-          <div className="shop-img">
-            <img src={category.img} alt="Laptop Collection"></img>
+          <div className="shop-img w-[343px] h-[232px]">
+            <img
+              src={collection.img}
+              className="object-contain w-[250px] h-[240px]"
+              alt="Collection"
+            ></img>
           </div>
           <div className="p-4 shop-body">
             <h3 className="text-2xl font-semibold">
-              {category.title} <br /> Collection
+              {collection.title} <br /> Collection
             </h3>
             <a
               href="#"

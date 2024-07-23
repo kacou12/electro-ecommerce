@@ -1,11 +1,23 @@
 import { AddToCartForm } from '@/components/forms/add-to-cart-form.component'
 import { Footer } from '@/components/globals/footer'
+import { LocalRating } from '@/components/globals/local-rating'
 import { Newsletter } from '@/components/globals/newsletter.component'
 import { ProductDetailSlick } from '@/components/products/product-detail-slick'
 import { ProductTabs } from '@/components/products/product-tabs.component'
+import { ProductType } from '@/interfaces/global.interface'
+import { formatPrice, formatReductPrice } from '@/utils/index.utils'
+import { createContext, useContext } from 'react'
 import { CiHeart } from 'react-icons/ci'
+import { useLoaderData } from 'react-router'
 
+export const ProductContext = createContext<ProductType | null>(null)
+
+export function useProductContext() {
+  return useContext(ProductContext)
+}
 export default function ProductDetails() {
+  const product = useLoaderData() as ProductType
+
   return (
     <div>
       <div className="centerContent">
@@ -17,7 +29,9 @@ export default function ProductDetails() {
               {/* <!-- row --> */}
               <div className="grid grid-cols-12 gap-10">
                 <div className="col-span-7 bg-green-500">
-                  <ProductDetailSlick></ProductDetailSlick>
+                  <ProductDetailSlick
+                    imgs={product.images}
+                  ></ProductDetailSlick>
                 </div>
 
                 {/* <!-- Product details --> */}
@@ -25,7 +39,7 @@ export default function ProductDetails() {
                   <div className="product-details">
                     <div className="flex justify-between">
                       <h2 className="product-name font-bold">
-                        product name goes here
+                        {product.title}
                       </h2>
                       <div className="product-btns">
                         <button className="rounded-full p-1 border border-transparent hover:bg-primary/20 transition duration-300 ">
@@ -35,11 +49,9 @@ export default function ProductDetails() {
                     </div>
                     <div>
                       <div className="product-rating">
-                        <i className="fa fa-star fa-xs"></i>
-                        <i className="fa fa-star fa-xs"></i>
-                        <i className="fa fa-star fa-xs"></i>
-                        <i className="fa fa-star fa-xs"></i>
-                        <i className="fa fa-star-o fa-xs"></i>
+                        {product.rating && (
+                          <LocalRating rate={product.rating}></LocalRating>
+                        )}
                       </div>
                       <a className="review-link" href="#">
                         10 Review(s) | Add your review
@@ -47,16 +59,24 @@ export default function ProductDetails() {
                     </div>
                     <div>
                       <h3 className="product-price font-bold">
-                        $980.00 <del className="product-old-price">$990.00</del>
+                        <span
+                          className={`${
+                            product.reduction == null ? 'w-full' : ''
+                          }   `}
+                        >
+                          {product.reduction
+                            ? formatReductPrice(product)
+                            : formatPrice(product.price)}
+                        </span>
+
+                        {product.reduction && (
+                          <del className="product-old-price">
+                            {formatPrice(product.price)}
+                          </del>
+                        )}
                       </h3>
-                      <span className="product-available">In Stock</span>
                     </div>
-                    <p className="text-sm">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </p>
+                    <p className="text-sm">{product.subtitle}</p>
 
                     {/* ADD TO CART */}
                     <AddToCartForm></AddToCartForm>
@@ -101,7 +121,9 @@ export default function ProductDetails() {
 
                 {/* <!-- Product tab --> */}
                 <div className="col-span-12">
-                  {/* <ProductTabs></ProductTabs> */}
+                  <ProductContext.Provider value={product}>
+                    <ProductTabs></ProductTabs>
+                  </ProductContext.Provider>
                 </div>
                 {/* <!-- /product tab --> */}
               </div>
@@ -112,14 +134,6 @@ export default function ProductDetails() {
           {/* <!-- /SECTION --> */}
         </main>
       </div>
-
-      {/* <!-- NEWSLETTER --> */}
-      <Newsletter></Newsletter>
-      {/* <!-- /NEWSLETTER --> */}
-
-      {/* <!-- FOOTER --> */}
-      <Footer></Footer>
-      {/* <!-- /FOOTER --> */}
     </div>
   )
 }

@@ -6,11 +6,27 @@ import { ScrollRestoration } from 'react-router-dom'
 import { Breadcrumbs } from './globals/breadcrumbs.component'
 import { Footer } from './globals/footer'
 import { Header } from './globals/header.component'
+import { ToastContainer, Bounce } from 'react-toastify'
 
 export default function App() {
   const { pathname } = useLocation()
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Bounce}
+      />
+      {/* Same as */}
+      <ToastContainer />
       <ScrollRestoration />
       {/* <!-- HEADER --> */}
       <Header></Header>

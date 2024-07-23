@@ -1040,7 +1040,6 @@ body {
   
   .product .add-to-cart {
     position: absolute;
-
     left: 0px;
     right: 0px;
     bottom: 1px;
@@ -1054,12 +1053,13 @@ body {
     transition: 0.2s all;
     z-index: 2;
   }
-  
+
   .product:hover .add-to-cart {
     -webkit-transform: translateY(100%);
     -ms-transform: translateY(100%);
     transform: translateY(100%);
-    
+    left: -2px;
+    right: -2px;
   }
   
   .product .add-to-cart .add-to-cart-btn {
@@ -1756,7 +1756,7 @@ body {
   .reviews li {
     position: relative;
     padding-left: 145px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
   
   .reviews .review-heading {

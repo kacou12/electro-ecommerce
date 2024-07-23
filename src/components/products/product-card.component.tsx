@@ -1,19 +1,18 @@
-import React from 'react'
-import { IoIosCall } from 'react-icons/io'
-import { FaRegHeart } from 'react-icons/fa'
-import { IoCartOutline } from 'react-icons/io5'
 import { ProductType } from '@/interfaces/global.interface'
 import { formatPrice, formatReductPrice, isNew } from '@/utils/index.utils'
+import { useNavigate } from 'react-router'
 import { LocalRating } from '../globals/local-rating'
 // import dayjs from 'dayjs'
 
 const ProductCard = ({ product }: { product: ProductType }) => {
-  // const isNew = () => {
-  //   const date1 = dayjs(Date.now())
-  //   const date2 = dayjs(product.createdAt)
-  //   return date1.diff(date2, 'month') <= 1
-  //   // product.createdAt.
-  // }
+  const navigate = useNavigate()
+  const goToDetailPage = (product: ProductType) => {
+    setTimeout(() => {
+      navigate(
+        `/${product.collection.slug}/${product.category.slug}/${product.slug}`
+      )
+    }, 500)
+  }
   return (
     <div>
       <div className="product">
@@ -62,7 +61,10 @@ const ProductCard = ({ product }: { product: ProductType }) => {
               <i className="fa fa-exchange fa-xs"></i>
               <span className="tooltipp">add to compare</span>
             </button>
-            <button className="quick-view">
+            <button
+              className="quick-view"
+              onClick={() => goToDetailPage(product)}
+            >
               <i className="fa fa-eye fa-xs"></i>
               <span className="tooltipp">quick view</span>
             </button>

@@ -8,6 +8,7 @@ import { categoryLoader } from './loaders/category.loader'
 import { collectionLoader } from './loaders/collection.loader'
 import { homeLoader } from './loaders/home.loader'
 import { hotDealLoader } from './loaders/hotdeal.loader'
+import { productLoader } from './loaders/product.loader'
 // import Collection from '@/views/collection.view'
 
 const ProductDetails = lazy(() => import('@/views/product-details.view'))
@@ -49,7 +50,8 @@ export const router = createBrowserRouter([
       },
       {
         path: RouteEnum.PRODUCT_DETAILS,
-        element: <ProductDetails></ProductDetails>
+        element: <ProductDetails></ProductDetails>,
+        loader: productLoader
       },
 
       {

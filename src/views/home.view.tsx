@@ -10,6 +10,16 @@ import { useGetAllCollectionsQuery } from '@/services/collections.service'
 
 function Home() {
   const { data: collections } = useGetAllCollectionsQuery()
+
+  const showCollections = () => {
+    const elements = []
+    for (let index = 0; index <= 2; index++) {
+      elements.push(collections![index])
+    }
+    return elements.map((coll) => (
+      <Collection key={coll.id} collection={coll}></Collection>
+    ))
+  }
   return (
     <>
       <div>
@@ -19,13 +29,12 @@ function Home() {
           <div className="container mx-auto px-4 py-8">
             {/* <!-- row --> */}
             <div className="flex flex-wrap -mx-4">
-              {/* <!-- shop --> */}
-              <Collection
+              {showCollections()}
+
+              {/* <Collection
                 category={{ title: 'Laptop', img: '/img/shop01.png', id: 1 }}
               ></Collection>
-              {/* <!-- /shop --> */}
-
-              {/* <!-- shop --> */}
+            
               <Collection
                 category={{
                   title: 'Accessories',
@@ -33,13 +42,11 @@ function Home() {
                   id: 2
                 }}
               ></Collection>
-              {/* <!-- /shop --> */}
-
-              {/* <!-- shop --> */}
+              
+           
               <Collection
                 category={{ title: 'Cameras', img: '/img/shop02.png', id: 2 }}
-              ></Collection>
-              {/* <!-- /shop --> */}
+              ></Collection> */}
             </div>
             {/* <!-- /row --> */}
           </div>

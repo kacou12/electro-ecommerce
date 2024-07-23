@@ -1,12 +1,17 @@
 import { ProductType } from '@/interfaces/global.interface'
-import { Button } from 'flowbite-react'
-import { IoCartOutline } from 'react-icons/io5'
-import { HiOutlineArrowRight } from 'react-icons/hi'
-import { IoIosRemove, IoMdAdd, IoMdRemove } from 'react-icons/io'
 import { formatPrice, formatReductPrice, isNew } from '@/utils/index.utils'
+import { useNavigate } from 'react-router'
 import { LocalRating } from '../globals/local-rating'
 
 const ProductLineCard = ({ product }: { product: ProductType }) => {
+  const navigate = useNavigate()
+  const goToDetailPage = (product: ProductType) => {
+    setTimeout(() => {
+      navigate(
+        `/${product.collection.slug}/${product.category.slug}/${product.slug}`
+      )
+    }, 500)
+  }
   return (
     <div>
       <div className="product">
@@ -73,7 +78,10 @@ const ProductLineCard = ({ product }: { product: ProductType }) => {
               {/* END ADD TO CART BUTTON */}
 
               {/* ADD TO CART */}
-              <button className="quick-view">
+              <button
+                className="quick-view"
+                onClick={() => goToDetailPage(product)}
+              >
                 <i className="fa fa-eye fa-xs"></i>
                 <span className="tooltipp">quick view</span>
               </button>

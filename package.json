@@ -32,6 +32,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/react-slick": "^0.23.13",
     "@types/redux-logger": "^3.0.13",
+    "@types/uuid": "^10.0.0",
     "clx": "^1.0.0",
     "dayjs": "^1.11.11",
     "flowbite-react": "^0.10.1",
@@ -48,11 +49,13 @@
     "react-router-dom": "^6.23.1",
     "react-router-typesafe": "^1.5.0",
     "react-slick": "^0.30.2",
+    "react-toastify": "^10.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^3.1.0",
     "sass": "^1.77.5",
     "slick-carousel": "^1.8.1",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.6",

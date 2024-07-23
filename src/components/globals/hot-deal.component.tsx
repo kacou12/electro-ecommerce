@@ -1,4 +1,5 @@
 import { useCountDown } from '@reactuses/core'
+import { Button } from 'flowbite-react'
 import React from 'react'
 
 export const HotDeal = () => {
@@ -28,7 +29,7 @@ export const HotDeal = () => {
                 <li className="rounded-full flex p-8 justify-center items-center bg-primary">
                   <div className="text-center px-1 flex flex-col w-10  h-10 border items-center">
                     <p className="text-[22px] font-bold leading-none">{hour}</p>
-                    <span className="text-[10px] ">HOURS</span>
+                    <span className="text-[10px]">HOURS</span>
                   </div>
                 </li>
                 <li className="rounded-full flex p-8 justify-center items-center bg-primary">
@@ -36,7 +37,7 @@ export const HotDeal = () => {
                     <p className="text-[22px] font-bold leading-none">
                       {minute}
                     </p>
-                    <span className="text-[10px] ">MINS</span>
+                    <span className="text-[10px]">MINS</span>
                   </div>
                 </li>
                 <li className="rounded-full flex p-8 justify-center items-center bg-primary">
@@ -44,23 +45,27 @@ export const HotDeal = () => {
                     <p className="text-[22px] font-bold leading-none">
                       {second}
                     </p>
-                    <span className="text-[10px] ">SECS</span>
+                    <span className="text-[10px]">SECS</span>
                   </div>
                 </li>
               </ul>
             </div>
             <div className="flex flex-col items-center w-full md:w-1/2 px-4 mt-10">
-              <div className="text-center">
+              <div className="text-center ">
                 <h2 className="text-3xl font-bold text-uppercase mb-2">
                   HOT DEAL THIS WEEK
                 </h2>
                 <p className="text-2xl">NEW COLLECTION UP TO 50% OFF</p>
-                <a
+                {/* <a
                   href="#"
                   className="bg-primary  text-white px-6 py-3 rounded-full inline-block mt-4 hover:bg-blue-600 transition duration-300"
                 >
                   SHOP NOW
-                </a>
+                </a> */}
+
+                <Button className="rounded-full mx-auto px-3 py-1 mt-2">
+                  SHOP NOW
+                </Button>
               </div>
             </div>
           </div>

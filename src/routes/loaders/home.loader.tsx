@@ -1,7 +1,5 @@
 import { collectionApi } from '@/services/collections.service'
-import { productApi } from '@/services/products.service'
 import { store } from '@/store'
-import React from 'react'
 import { Params } from 'react-router'
 
 export const homeLoader = async ({ params }: { params: Params<string> }) => {
@@ -10,9 +8,8 @@ export const homeLoader = async ({ params }: { params: Params<string> }) => {
       collectionApi.endpoints.getAllCollections.initiate()
     )
 
-    const response = await Promise.all([fetchAllCollections.unwrap()])
-
-    return response[0]
+    const response = await fetchAllCollections.unwrap()
+    return response
   } catch (e) {
     throw new Response('Not Found', { status: 404 })
   }

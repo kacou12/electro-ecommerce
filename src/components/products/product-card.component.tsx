@@ -2,6 +2,8 @@ import { ProductType } from '@/interfaces/global.interface'
 import { formatPrice, formatReductPrice, isNew } from '@/utils/index.utils'
 import { useNavigate } from 'react-router'
 import { LocalRating } from '../globals/local-rating'
+import { ProductAction } from './product-action.component'
+import { useCart } from '@/hooks/useCart'
 // import dayjs from 'dayjs'
 
 const ProductCard = ({ product }: { product: ProductType }) => {
@@ -13,11 +15,21 @@ const ProductCard = ({ product }: { product: ProductType }) => {
       )
     }, 500)
   }
+  const imgError = (img: string) => {
+    return img.replace('/r250/', '/r150/')
+  }
+
+  const addDefaultSrc = (ev: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    //@ts-ignore
+    ev.target.src = imgError(product.images[0])
+  }
+
+  const { isInCart, addToCart } = useCart()
   return (
     <div>
       <div className="product">
         <div className="product-img">
-          <img src={product.images[0]} alt="" />
+          <img src={product.images[0]} onError={addDefaultSrc} alt="" />
           <div className="product-label space-x-1">
             {product.reduction && (
               <span className="sale">-{product.reduction}%</span>
@@ -31,7 +43,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
             <a href="#">{product.title}</a>
           </h3>
           <h4 className="product-price font-bold">
-            <div className="flex items-center justify-center">
+            <div className="flex  items-end justify-center space-x-1 leading-none">
               <span
                 className={`${product.reduction == null ? 'w-full' : ''}   `}
               >
@@ -52,26 +64,13 @@ const ProductCard = ({ product }: { product: ProductType }) => {
               <LocalRating rate={product.rating}></LocalRating>
             )}
           </div>
-          <div className="product-btns">
-            <button className="add-to-wishlist">
-              <i className="fa-regular fa-heart fa-xs"></i>
-              <span className="tooltipp">add to wishlist</span>
-            </button>
-            <button className="add-to-compare">
-              <i className="fa fa-exchange fa-xs"></i>
-              <span className="tooltipp">add to compare</span>
-            </button>
-            <button
-              className="quick-view"
-              onClick={() => goToDetailPage(product)}
-            >
-              <i className="fa fa-eye fa-xs"></i>
-              <span className="tooltipp">quick view</span>
-            </button>
-          </div>
+          <ProductAction hiddenCart={true} product={product}></ProductAction>
         </div>
-        <div className="add-to-cart">
-          <button className="add-to-cart-btn">
+        <div className={` ${isInCart({ product }) && 'hidden'}  add-to-cart`}>
+          <button
+            onClick={() => addToCart({ product })}
+            className="add-to-cart-btn"
+          >
             <i className="fa fa-shopping-cart"></i> add to cart
           </button>
         </div>

@@ -11,7 +11,6 @@ export const useFormatQueryParams = ({
   selectedBrands: string[]
   selectedFilterBy: SortTypeEnum | null
 }) => {
-  let filterObj = []
   const sortData = selectedFilterBy?.split('_')
 
   const obj = {

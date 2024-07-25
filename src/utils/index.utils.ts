@@ -13,6 +13,9 @@ export const formatPrice = (price: number) =>
 export const formatReductPrice = (product: ProductType) => {
   return formatPrice(product.price - (product.price * product.reduction!) / 100)
 }
+export const reductPrice = (product: ProductType) => {
+  return product.price - (product.price * product.reduction!) / 100
+}
 
 // declare the function
 export const shuffle = <T>(array: T[]) => {
@@ -28,4 +31,10 @@ export const isNew = (createdAt: Date) => {
   const date2 = dayjs(createdAt)
   return date1.diff(date2, 'month') <= 1
   // product.createdAt.
+}
+
+export const pause = (duration: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, duration)
+  })
 }

@@ -44,31 +44,6 @@ export const Navigation = () => {
                 </Link>
               </li>
               {listNav()}
-              {/* <li>
-                <a href="#" className="text-header">
-                  Categories
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-header">
-                  Laptops
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-header">
-                  Smartphones
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-header">
-                  Cameras
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-header">
-                  Accessories
-                </a>
-              </li> */}
             </ul>
             {/* <!-- /NAV --> */}
           </div>

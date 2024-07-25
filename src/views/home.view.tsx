@@ -28,26 +28,7 @@ function Home() {
           {/* <!-- container --> */}
           <div className="container mx-auto px-4 py-8">
             {/* <!-- row --> */}
-            <div className="flex flex-wrap -mx-4">
-              {showCollections()}
-
-              {/* <Collection
-                category={{ title: 'Laptop', img: '/img/shop01.png', id: 1 }}
-              ></Collection>
-            
-              <Collection
-                category={{
-                  title: 'Accessories',
-                  img: '/img/shop03.png',
-                  id: 2
-                }}
-              ></Collection>
-              
-           
-              <Collection
-                category={{ title: 'Cameras', img: '/img/shop02.png', id: 2 }}
-              ></Collection> */}
-            </div>
+            <div className="flex flex-wrap -mx-4">{showCollections()}</div>
             {/* <!-- /row --> */}
           </div>
           {/* <!-- /container --> */}

@@ -6,8 +6,11 @@ import { CartDropdown } from '../cart/cart-dropdown'
 import { Link } from 'react-router-dom'
 import { RouteEnum } from '@/routes/route.enum'
 import { SearchBar } from '../searchbar'
+import { useSelector } from 'react-redux'
+import { cartsSelectors } from '@/store/slices/cart.slice'
 
 export const Header = () => {
+  // const carts = useSelector(cartsSelectors.selectAll)
   return (
     <>
       {/* <!-- HEADER --> */}

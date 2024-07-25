@@ -1,10 +1,8 @@
-import React, { useRef } from 'react'
-import Slider, { Settings } from 'react-slick'
-import { IoIosArrowBack } from 'react-icons/io'
-import { IoIosArrowForward } from 'react-icons/io'
-import { ProductType } from '@/interfaces/global.interface'
-import ProdutLine from '../products/slick-produt-line.component'
 import { useGetTopSellingProductsByCategorySlugQuery } from '@/services/products.service'
+import { useRef } from 'react'
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
+import Slider, { Settings } from 'react-slick'
+import ProdutLine from '../products/slick-produt-line.component'
 
 function MiniSlider({
   title,
@@ -20,9 +18,9 @@ function MiniSlider({
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false,
-    speed: 2000,
-    autoplaySpeed: 2000,
+    autoplay: true,
+    speed: 200,
+    autoplaySpeed: 5000,
     cssEase: 'linear',
     arrows: false,
     dots: false
@@ -59,7 +57,7 @@ function MiniSlider({
     for (let index = 0; index <= products!.length - 2; index += 3) {
       const currentProduct = products![index]
       let currentLine = (
-        <div key={currentProduct.id}>
+        <div key={currentProduct.id} className="space-y-4">
           <ProdutLine product={products![index]}></ProdutLine>
           <ProdutLine product={products![index + 1]}></ProdutLine>
           <ProdutLine product={products![index + 2]}></ProdutLine>
@@ -99,21 +97,6 @@ function MiniSlider({
         <div className=" ">
           <Slider ref={sliderRef} {...settings}>
             {isFetching ? <span>loading...</span> : listProducts()}
-            {/* <div>
-              <ProdutLine></ProdutLine>
-              <ProdutLine></ProdutLine>
-              <ProdutLine></ProdutLine>
-            </div>
-            <div>
-              <ProdutLine></ProdutLine>
-              <ProdutLine></ProdutLine>
-              <ProdutLine></ProdutLine>
-            </div>
-            <div>
-              <ProdutLine></ProdutLine>
-              <ProdutLine></ProdutLine>
-              <ProdutLine></ProdutLine>
-            </div> */}
           </Slider>
         </div>
       </div>

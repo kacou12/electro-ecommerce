@@ -24,6 +24,12 @@ export interface CommentType {
   rate: number
   productSlug: string
 }
+
+export interface CartType {
+  id: string
+  quantity: number
+  product: ProductType
+}
 export interface NullableCommentType {
   id?: string
   fullName: string

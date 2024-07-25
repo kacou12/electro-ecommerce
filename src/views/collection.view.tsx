@@ -108,7 +108,11 @@ function Collection() {
 
   const categoryList = () => {
     return collection!.categories.map((categorie) => (
-      <Link className="text-sm" to={`/${collectionSlug}/${categorie.slug}`}>
+      <Link
+        key={categorie.id}
+        className="text-sm"
+        to={`/${collectionSlug}/${categorie.slug}`}
+      >
         <div
           key={categorie.id}
           className="px-2 py-[10px] hover:bg-gray-300 transition"

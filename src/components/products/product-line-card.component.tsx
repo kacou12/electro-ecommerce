@@ -1,22 +1,28 @@
+import { useCart } from '@/hooks/useCart'
 import { ProductType } from '@/interfaces/global.interface'
 import { formatPrice, formatReductPrice, isNew } from '@/utils/index.utils'
+import { Button } from 'flowbite-react'
+import { IoMdAdd, IoMdRemove } from 'react-icons/io'
 import { useNavigate } from 'react-router'
 import { LocalRating } from '../globals/local-rating'
+import { ProductAction } from './product-action.component'
 
 const ProductLineCard = ({ product }: { product: ProductType }) => {
   const navigate = useNavigate()
-  const goToDetailPage = (product: ProductType) => {
-    setTimeout(() => {
-      navigate(
-        `/${product.collection.slug}/${product.category.slug}/${product.slug}`
-      )
-    }, 500)
+
+  const imgError = (img: string) => {
+    return img.replace('/r250/', '/r150/')
+  }
+
+  const addDefaultSrc = (ev: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    //@ts-ignore
+    ev.target.src = imgError(product.images[0])
   }
   return (
     <div>
       <div className="product">
         <div className="product-img">
-          <img src={product.images[0]} alt="" />
+          <img src={product.images[0]} onError={addDefaultSrc} alt="" />
           <div className="product-label space-x-1">
             {product.reduction && (
               <span className="sale">-{product.reduction}%</span>
@@ -30,7 +36,7 @@ const ProductLineCard = ({ product }: { product: ProductType }) => {
             <a href="#">{product.title}</a>
           </h3>
           <h4 className="product-price font-bold">
-            <div className="flex items-center justify-center">
+            <div className="flex  items-end justify-center space-x-1 leading-none">
               <span
                 className={`${product.reduction == null ? 'w-full' : ''}   `}
               >
@@ -51,51 +57,7 @@ const ProductLineCard = ({ product }: { product: ProductType }) => {
               <LocalRating rate={product.rating}></LocalRating>
             )}
           </div>
-          <section className="flex items-center">
-            {/* INCREASE  QUANTITY */}
-            {/* <div className="increase-qty ">
-              <Button className="w-10 h-10 rounded-md flex justify-center items-center">
-                <IoMdRemove className="w-6 h-6" />
-              </Button>
-            </div> */}
-            {/* END INCREASE  QUANTITY */}
-
-            <div className="product-btns  flex-1">
-              <button className="add-to-wishlist">
-                <i className="fa-regular fa-heart fa-xs"></i>
-                <span className="tooltipp">add to wishlist</span>
-              </button>
-
-              {/* PRODUCT QUANITY */}
-              {/* <span className="product-qty px-4 font-bold">1</span> */}
-              {/* END PRODUCT QUANITY */}
-
-              {/* ADD TO CART BUTTON */}
-              <button className="add-to-compare">
-                <i className="fa-solid fa-cart-shopping fa-xs"></i>
-                <span className="tooltipp">add to cart</span>
-              </button>
-              {/* END ADD TO CART BUTTON */}
-
-              {/* ADD TO CART */}
-              <button
-                className="quick-view"
-                onClick={() => goToDetailPage(product)}
-              >
-                <i className="fa fa-eye fa-xs"></i>
-                <span className="tooltipp">quick view</span>
-              </button>
-              {/* END TO CART */}
-            </div>
-
-            {/* DECCREASE  QUANTITY */}
-            {/* <div className="decrease-qty ">
-              <Button className="w-10 h-10 rounded-md flex justify-center items-center">
-                <IoMdAdd className="w-6 h-6 text-white" />
-              </Button>
-            </div> */}
-            {/* END DECCREASE  QUANTITY */}
-          </section>
+          <ProductAction product={product}></ProductAction>
         </div>
       </div>
     </div>

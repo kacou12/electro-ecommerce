@@ -7,10 +7,9 @@ import { Outlet } from 'react-router'
 
 interface TopSellingProps {
   children: React.ReactNode
-  age: string
 }
 
-export const DefaultLayout = ({ children, age }: TopSellingProps) => {
+export const DefaultLayout = ({ children }: TopSellingProps) => {
   return (
     <>
       {/* <!-- HEADER --> */}
@@ -20,7 +19,6 @@ export const DefaultLayout = ({ children, age }: TopSellingProps) => {
       <Navigation></Navigation>
       {/* <!-- END NAVIGATION --> */}
       {/* CHILDREN */}
-      {age}
       {children}
       {/* END CHILDREN */}
       {/* <!-- NEWSLETTER --> */}

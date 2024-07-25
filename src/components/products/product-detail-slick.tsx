@@ -35,7 +35,7 @@ export const ProductDetailSlick = ({ imgs }: { imgs: string[] }) => {
     )
   }
   const wideCard = (text: string) => {
-    const imgText = text.replace('r150', 'r900')
+    const imgText = text.replace('r250', 'r900')
     return (
       <div className="h-[525px] bg-white text-white  flex justify-center items-center ">
         <img className="object-contain w-[90%] h-[90%]" src={imgText} alt="" />

@@ -9,12 +9,13 @@ import 'slick-carousel/slick/slick-theme.css'
 import 'slick-carousel/slick/slick.css'
 import 'tailwindcss/tailwind.css'
 import { Loader } from './components/loader'
-import { store } from './store'
+import { persistore, store } from './store'
 import './styles/index.scss'
 import './styles/local.scss'
 import { customTheme } from './utils/tailwind.theme'
 import { PageError } from './views/page-error'
 import 'react-toastify/dist/ReactToastify.css'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const container = document.getElementById('root') as HTMLDivElement
 const root = createRoot(container)
@@ -27,9 +28,11 @@ root.render(
     <Flowbite theme={{ theme: customTheme }}>
       <Provider store={store}>
         <Suspense fallback={<Loader />}>
-          <ErrorBoundary FallbackComponent={PageError}>
-            <RouterProvider router={router} />
-          </ErrorBoundary>
+          <PersistGate loading={null} persistor={persistore}>
+            <ErrorBoundary FallbackComponent={PageError}>
+              <RouterProvider router={router} />
+            </ErrorBoundary>
+          </PersistGate>
         </Suspense>
       </Provider>
     </Flowbite>

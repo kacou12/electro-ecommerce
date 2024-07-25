@@ -6,10 +6,22 @@ import {
 } from '@/interfaces/global.interface'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+const pause = (duration: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, duration)
+  })
+}
+
 // Define a service using a base URL and expected endpoints
 export const productApi = createApi({
   reducerPath: 'productApi',
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_BASE_URL,
+    fetchFn: async (...args) => {
+      await pause(3000)
+      return fetch(...args)
+    }
+  }),
 
   endpoints: (builder) => ({
     getProductBySlug: builder.query<ProductType, string>({
@@ -20,6 +32,7 @@ export const productApi = createApi({
     }),
     getAllProducts: builder.query<ProductType[], void>({
       query: () => `products?_limit=1`
+
       //   Types:
     }),
     getSearchLimitedProducts: builder.query<PaginateData<ProductType>, string>({
@@ -96,8 +109,11 @@ export const productApi = createApi({
     }),
     getNewProductsByCollectionSlug: builder.query<ProductType[], string>({
       extraOptions: {},
-      query: (slugCollection) =>
-        `products?_limit=10&collection.slug=${slugCollection}`
+      // query: (slugCollection) =>
+      //   `products?_limit=10&collection.slug=${slugCollection}`
+      query: (slugCollection) => {
+        return `products?_limit=10&collection.slug=${slugCollection}`
+      }
     }),
     getTopSellingProductsByCollectionSlug: builder.query<ProductType[], string>(
       {

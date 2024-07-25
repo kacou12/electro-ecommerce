@@ -1,18 +1,15 @@
-import React from 'react'
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import clsx from 'clsx'
-import { Fragment } from 'react'
-import { FaRegHeart } from 'react-icons/fa'
-import { CartDropdownLine } from './cart-dropdown-line'
+import { cartsSelectors } from '@/store/slices/cart.slice'
+import { Menu, MenuButton, MenuItems } from '@headlessui/react'
 import { Button } from 'flowbite-react'
-
-const links = [
-  { href: '/settings', label: 'Settings' },
-  { href: '/support', label: 'Support' },
-  { href: '/license', label: 'License' }
-]
+import { FaRegHeart } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
+import { CartDropdownLine } from './cart-dropdown-line'
+import { formatPrice } from '@/utils/index.utils'
+import { useCart } from '@/hooks/useCart'
+import { CartType } from '@/interfaces/global.interface'
 
 export const CartDropdown = () => {
+  const { carts, subTotalCarts } = useCart()
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -30,7 +27,7 @@ export const CartDropdown = () => {
                 ></FaRegHeart>
               </span>
               <p className={`text-xs ${hover || active ? 'text-primary' : ''}`}>
-                Your Wishlist
+                Your Cart
               </p>
               <div
                 className="absolute right-2 -top-3 inline-flex items-center justify-center w-5 h-5 text-xs
@@ -51,78 +48,58 @@ export const CartDropdown = () => {
         data-[closed]:opacity-0 data-[enter]:duration-100 
         data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
       >
-        <section
-          id="scroll-design"
-          className="m-4 space-y-1 h-[200px] overflow-y-scroll"
-        >
-          <CartDropdownLine></CartDropdownLine>
-          <CartDropdownLine></CartDropdownLine>
-          <CartDropdownLine></CartDropdownLine>
-          <CartDropdownLine></CartDropdownLine>
-          <CartDropdownLine></CartDropdownLine>
-        </section>
-        <section></section>
-        <section></section>
-        {/* <div className="py-1">
-          <MenuItem>
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-            >
-              Account settings
-            </a>
-          </MenuItem>
-          <MenuItem>
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-            >
-              Support
-            </a>
-          </MenuItem>
-          <MenuItem>
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-            >
-              License
-            </a>
-          </MenuItem>
-          <form action="#" method="POST">
-            <MenuItem>
-              <button
-                type="submit"
-                className="block w-full px-4 py-2 text-left text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:text-gray-900"
-              >
-                Sign out
-              </button>
-            </MenuItem>
-          </form>
-        </div> */}
-
-        <div>
-          <div className="local-cart-dropdown">
-            <div className="m-4">
-              <p className="text-black text-xs">3 Item(s) selected</p>
-              <h4 className="font-bold text-sm">SUBTOTAL: $2940.00</h4>
-            </div>
-            <div className="flex ">
-              <Button color="dark" className="flex-1 rounded-none">
-                View Cart
-              </Button>
-
-              <Button
-                color="failure"
-                className="flex-1 rounded-none flex items-center justify-center"
-              >
-                <span>Checkout</span>
-                <div className="ml-1">
-                  <i className="fa fa-arrow-circle-right"></i>
-                </div>
-              </Button>
-            </div>
+        {carts.length == 0 ? (
+          <div className="h-40 flex flex-col justify-center items-center">
+            <img src="/img/empty_cart.png" className="h-20 w-20 " alt="" />
+            <p className="text-gray-500 text-sm">Your cart is empty</p>
           </div>
-        </div>
+        ) : (
+          <>
+            <section
+              id="scroll-design"
+              className={`m-4 space-y-1 ${
+                carts.length >= 4 && 'h-[200px] overflow-y-scroll'
+              }`}
+            >
+              {carts.map((cartLine) => {
+                return (
+                  <CartDropdownLine
+                    cartLine={cartLine}
+                    key={cartLine.id}
+                  ></CartDropdownLine>
+                )
+              })}
+            </section>
+
+            <div>
+              <div className="local-cart-dropdown">
+                <div className="m-4">
+                  <p className="text-black text-xs">
+                    {carts.length} Item(s) selected
+                  </p>
+                  <h4 className="font-bold text-sm">
+                    SUBTOTAL: {formatPrice(subTotalCarts())}
+                  </h4>
+                </div>
+                <div className="flex ">
+                  <Button color="dark" className="flex-1 rounded-none">
+                    View Cart
+                  </Button>
+
+                  <Button
+                    color="failure"
+                    className="flex-1 rounded-none flex items-center justify-center"
+                  >
+                    <span>Checkout</span>
+                    <div className="ml-1">
+                      <i className="fa fa-arrow-circle-right"></i>
+                    </div>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </MenuItems>
     </Menu>
   )

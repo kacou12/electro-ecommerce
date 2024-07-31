@@ -7,34 +7,37 @@ import { CartDropdownLine } from './cart-dropdown-line'
 import { formatPrice } from '@/utils/index.utils'
 import { useCart } from '@/hooks/useCart'
 import { CartType } from '@/interfaces/global.interface'
+import { IoCartOutline } from 'react-icons/io5'
 
 export const CartDropdown = () => {
   const { carts, subTotalCarts } = useCart()
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative inline-block text-left ">
       <div>
         <MenuButton>
           {({ hover, active }) => (
             <div
               className="relative flex flex-col items-center 
                 text-sm 
-                text-white border header-dropdown"
+                text-white header-dropdown"
             >
               <span>
-                <FaRegHeart
+                <IoCartOutline
                   color={hover || active ? '#D10024' : ''}
                   size={20}
-                ></FaRegHeart>
+                ></IoCartOutline>
               </span>
               <p className={`text-xs ${hover || active ? 'text-primary' : ''}`}>
                 Your Cart
               </p>
-              <div
-                className="absolute right-2 -top-3 inline-flex items-center justify-center w-5 h-5 text-xs
+              {carts.length > 0 && (
+                <div
+                  className="absolute right-1 -top-3 inline-flex items-center justify-center w-5 h-5 text-xs
                 font-thin text-white bg-primary rounded-full "
-              >
-                5
-              </div>
+                >
+                  {carts.length}
+                </div>
+              )}
             </div>
           )}
         </MenuButton>

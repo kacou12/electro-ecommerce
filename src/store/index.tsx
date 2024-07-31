@@ -16,14 +16,25 @@ import {
 } from 'redux-persist'
 import { persistStore, persistReducer, PersistConfig } from 'redux-persist'
 import { cartsReducer } from './slices/cart.slice'
-import { CartType } from '@/interfaces/global.interface'
+import {
+  CartType,
+  DataUserToken,
+  UserState
+} from '@/interfaces/global.interface'
+import { authReducer } from './slices/auth.slice'
+import { authApi } from '@/services/auth.service'
 
-const persistConfig: PersistConfig<EntityState<CartType, string>> = {
+const persistCartConfig: PersistConfig<EntityState<CartType, string>> = {
   key: 'carts',
   storage
 }
+const persistAuthConfig: PersistConfig<UserState> = {
+  key: 'auth',
+  storage
+}
 
-const persistedReducer = persistReducer(persistConfig, cartsReducer)
+const persistedCartReducer = persistReducer(persistCartConfig, cartsReducer)
+const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer)
 
 export const store = configureStore({
   reducer: {
@@ -32,7 +43,9 @@ export const store = configureStore({
     [collectionApi.reducerPath]: collectionApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
     [commentApi.reducerPath]: commentApi.reducer,
-    carts: persistedReducer
+    carts: persistedCartReducer,
+    auth: persistedAuthReducer,
+    [authApi.reducerPath]: authApi.reducer
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -46,6 +59,7 @@ export const store = configureStore({
       .concat(collectionApi.middleware)
       .concat(categoryApi.middleware)
       .concat(commentApi.middleware)
+      .concat(authApi.middleware)
 })
 
 export const persistore = persistStore(store)

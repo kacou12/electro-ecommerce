@@ -7,9 +7,12 @@ import { PageError } from '@/views/page-error'
 import { categoryLoader } from './loaders/category.loader'
 import { collectionLoader } from './loaders/collection.loader'
 import { homeLoader } from './loaders/home.loader'
-import { hotDealLoader } from './loaders/hotdeal.loader'
 import { productLoader } from './loaders/product.loader'
-// import Collection from '@/views/collection.view'
+
+// LAYOUT
+import Auth from '@/layouts/auth.layout'
+import Guest from '@/layouts/guest.layout'
+import { authLoader } from './loaders/auth.loader'
 
 const ProductDetails = lazy(() => import('@/views/product-details.view'))
 const Home = lazy(() => import('@/views/home.view'))
@@ -18,6 +21,9 @@ const Category = lazy(() => import('@/views/category.view'))
 const Collection = lazy(() => import('@/views/collection.view'))
 const HotDeals = lazy(() => import('@/views/hot-deals.view'))
 const Search = lazy(() => import('@/views/search.view'))
+const Login = lazy(() => import('@/views/guest/login.view'))
+const Register = lazy(() => import('@/views/guest/register.view'))
+const Profil = lazy(() => import('@/views/auth/profile.view'))
 
 const Test = lazy(() => import('@/views/Test.view'))
 
@@ -62,6 +68,42 @@ export const router = createBrowserRouter([
       {
         path: RouteEnum.SEARCH,
         element: <Search></Search>
+      }
+    ]
+  },
+  {
+    path: RouteEnum.LOGIN,
+    element: <Login></Login>
+  },
+  {
+    path: RouteEnum.REGISTER,
+    element: <Register></Register>
+  },
+  // {
+  //   path: RouteEnum.GUEST,
+  //   element: <Guest></Guest>,
+  //   ErrorBoundary: () => <PageError></PageError>,
+  //   // loader: authLoader,
+  //   children: [
+  //     {
+  //       path: RouteEnum.LOGIN,
+  //       element: <Login></Login>
+  //     },
+  //     {
+  //       path: RouteEnum.REGISTER,
+  //       element: <Register></Register>
+  //     }
+  //   ]
+  // },
+  {
+    path: RouteEnum.AUTH,
+    element: <Auth></Auth>,
+    ErrorBoundary: () => <PageError></PageError>,
+    // loader: authLoader,
+    children: [
+      {
+        path: RouteEnum.PROFIL,
+        element: <Profil></Profil>
       }
     ]
   }

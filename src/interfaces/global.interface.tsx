@@ -38,11 +38,23 @@ export interface NullableCommentType {
   rate: number
   productSlug: string
 }
+export interface DataUserToken {
+  accessToken: string
+  user: User
+}
+
+export interface UserState {
+  loading: boolean
+  userInfo: DataUserToken | null
+  userToken: string | null
+  error: any | null
+  success: boolean
+}
 export interface User {
   id: string
   firstName: string
   lastName: string
-  favorites: number[]
+  favorites: ProductType[]
   phone: string
   email: string
 }

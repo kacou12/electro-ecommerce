@@ -5,6 +5,11 @@ import { useNavigate } from 'react-router'
 import { LocalRating } from '../globals/local-rating'
 import { ProductType } from '@/interfaces/global.interface'
 import { useCart } from '@/hooks/useCart'
+import { useToggleFavoriteProductMutation } from '@/services/auth.service'
+import { toast } from 'react-toastify'
+import { useAuth } from '@/hooks/useAuth'
+import { FavoriteActions, useFavoriteContext } from '../favorite-actions'
+import { useToggle } from '@reactuses/core'
 
 export const ProductAction = ({
   product,
@@ -14,6 +19,8 @@ export const ProductAction = ({
   hiddenCart?: boolean
 }) => {
   const navigate = useNavigate()
+  const { isFavorite } = useAuth()
+
   const {
     addToCart,
     isInCart,
@@ -22,6 +29,9 @@ export const ProductAction = ({
     getCartLineFromProduct: currentCartLine
   } = useCart()
 
+  const [initToggleFavorite, { isSuccess, isLoading }] =
+    useToggleFavoriteProductMutation()
+
   const goToDetailPage = (product: ProductType) => {
     setTimeout(() => {
       navigate(
@@ -29,6 +39,7 @@ export const ProductAction = ({
       )
     }, 500)
   }
+
   return (
     <>
       <section className="flex items-center">
@@ -46,10 +57,9 @@ export const ProductAction = ({
         {/* END INCREASE  QUANTITY */}
 
         <div className="product-btns  flex-1">
-          <button className="add-to-wishlist">
-            <i className="fa-regular fa-heart fa-xs"></i>
-            <span className="tooltipp">add to wishlist</span>
-          </button>
+          <FavoriteActions product={product}>
+            <FavoriteChild product={product}></FavoriteChild>
+          </FavoriteActions>
 
           {/* PRODUCT QUANITY */}
           {isInCart({ product }) ? (
@@ -92,5 +102,35 @@ export const ProductAction = ({
         {/* END DECCREASE  QUANTITY */}
       </section>
     </>
+  )
+}
+
+const FavoriteChild = ({ product }: { product: ProductType }) => {
+  const favoriteContext = useFavoriteContext()
+  const showIcon = () => {
+    const favoriteOn = useFavoriteContext()!.on
+    if (favoriteOn) {
+      return (
+        <>
+          <i className="fa-solid fa-heart fa-xs text-primary"></i>
+          <span className="tooltipp">delete from wishlist</span>
+        </>
+      )
+    }
+
+    return (
+      <>
+        <i className="fa-regular fa-heart fa-xs"></i>
+        <span className="tooltipp">add to wishlist</span>
+      </>
+    )
+  }
+  return (
+    <button
+      onClick={() => favoriteContext?.toggleFavoriteProduct()}
+      className="add-to-wishlist"
+    >
+      {showIcon()}
+    </button>
   )
 }

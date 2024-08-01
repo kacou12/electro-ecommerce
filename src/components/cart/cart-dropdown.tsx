@@ -27,7 +27,11 @@ export const CartDropdown = () => {
                   size={20}
                 ></IoCartOutline>
               </span>
-              <p className={`text-xs ${hover || active ? 'text-primary' : ''}`}>
+              <p
+                className={`text-center text-xs ${
+                  hover || active ? 'text-primary' : ''
+                }`}
+              >
                 Your Cart
               </p>
               {carts.length > 0 && (

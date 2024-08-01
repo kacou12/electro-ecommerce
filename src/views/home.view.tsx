@@ -26,14 +26,14 @@ function Home() {
         {/* <!-- SECTION COLLECTION --> */}
         <div className="section centerContent">
           {/* <!-- container --> */}
-          <div className="container mx-auto px-4 py-8">
+          <div className="mx-auto  py-8">
             {/* <!-- row --> */}
-            <div className="flex flex-wrap -mx-4">{showCollections()}</div>
+            <div className="flex flex-wrap">{showCollections()}</div>
             {/* <!-- /row --> */}
           </div>
           {/* <!-- /container --> */}
         </div>
-        {/* <!-- /SECTION  COLLECTION--> */}!
+        {/* <!-- /SECTION  COLLECTION--> */}
         {/* <!-- SECTION NEW PRODUCTS --> */}
         <NewProducts collections={collections!}></NewProducts>
         {/* <!-- /SECTION NEW PRODUCTS --> */}
@@ -48,9 +48,9 @@ function Home() {
           {/* <!-- container --> */}
           <div className="centerContent px-4 py-8">
             {/* <!-- row --> */}
-            <div className="flex flex-wrap -mx-4">
+            <div className="flex flex-wrap">
               {/* <!-- col-md-4 col-xs-6 --> */}
-              <div className="w-full md:w-4/12 px-4">
+              <div className="w-full sm:w-1/2 md:w-4/12 px-4">
                 <MiniSlider
                   title="MICRO-CASQUES"
                   categorySlug="micro-casque"
@@ -59,7 +59,7 @@ function Home() {
               {/* <!-- /col-md-4 col-xs-6 --> */}
 
               {/* <!-- col-md-4 col-xs-6 --> */}
-              <div className="w-full md:w-4/12 px-4">
+              <div className="w-full sm:w-1/2 md:w-4/12 px-4">
                 <MiniSlider
                   title={'SMARTPHONES'}
                   categorySlug={'smartphone-android'}
@@ -68,7 +68,7 @@ function Home() {
               {/* <!-- /col-md-4 col-xs-6 --> */}
 
               {/* <!-- col-md-4 col-xs-6 --> */}
-              <div className="w-full md:w-4/12 px-4">
+              <div className="w-full sm:w-1/2 md:w-4/12 px-4">
                 <MiniSlider
                   title="IPHONES"
                   categorySlug="iphone-apple"

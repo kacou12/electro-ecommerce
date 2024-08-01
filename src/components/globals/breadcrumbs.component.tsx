@@ -1,6 +1,7 @@
 import { RouteEnum } from '@/routes/route.enum'
 import React, { Fragment } from 'react'
 import { UIMatch, useMatches } from 'react-router'
+import { Link } from 'react-router-dom'
 
 export const Breadcrumbs = () => {
   let matches = useMatches() as UIMatch<string, string>[]
@@ -38,7 +39,7 @@ export const Breadcrumbs = () => {
         <section className="centerContent  h-full flex items-center py-7 text-xs">
           <ol className="flex space-x-3">
             <li>
-              <a href={RouteEnum.DEFAULT}>HOME</a>
+              <Link to={RouteEnum.DEFAULT}>HOME</Link>
             </li>
             <span>/</span>
             {keys.length >= 2 &&
@@ -46,9 +47,9 @@ export const Breadcrumbs = () => {
                 return (
                   <Fragment key={key}>
                     <li>
-                      <a href={`/${finalData[key]}`}>
+                      <Link to={`/${finalData[key]}`}>
                         {pathnames[item]!.toUpperCase()}
-                      </a>
+                      </Link>
                     </li>
                     <span>/</span>
                   </Fragment>

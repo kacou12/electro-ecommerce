@@ -1,5 +1,6 @@
 import { useAddCommentMutation } from '@/services/comment.service'
 import { useProductContext } from '@/views/product-details.view'
+import { Button } from 'flowbite-react'
 import { FormEvent, useContext, useEffect, useRef, useState } from 'react'
 
 import { toast } from 'react-toastify'
@@ -118,7 +119,9 @@ export const RatingForm = () => {
               <label htmlFor="star1"></label>
             </div>
           </div>
-          <button className="primary-btn">Submit</button>
+          <Button className="rounded-full px-4" size="sm">
+            Submit
+          </Button>
         </form>
       </div>
     </>

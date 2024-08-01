@@ -1,11 +1,7 @@
-import { DataUserToken } from '@/interfaces/global.interface'
 import GuestLayout from '@/layouts/guest.layout'
-import { RouteEnum } from '@/routes/route.enum'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { UserLogin } from '@/store/actions/auth.actions'
-import { setCredentials } from '@/store/slices/auth.slice'
 import { Button } from 'flowbite-react'
-import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 

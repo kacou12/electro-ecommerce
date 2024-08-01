@@ -1,5 +1,6 @@
 import { DataUserToken, User } from '@/interfaces/global.interface'
 import { RootState } from '@/store'
+import { pause } from '@/utils/index.utils'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
@@ -17,16 +18,29 @@ export const authApi = createApi({
       }
     }
   }),
+  tagTypes: ['User'],
   endpoints: (builder) => ({
-    getUserDetails: builder.query<DataUserToken, string>({
-      query: (userId) => ({
-        url: `600/users/${userId}`,
+    getUserDetails: builder.query<User, undefined>({
+      query: () => ({
+        url: `user-data`,
         method: 'GET'
-      })
+      }),
+      providesTags: ['User']
+    }),
+    toggleFavoriteProduct: builder.mutation<void, string>({
+      query: (productSlug) => ({
+        url: `favorite`,
+        method: 'POST',
+        body: {
+          productSlug
+        }
+      }),
+      invalidatesTags: ['User']
     })
   })
 })
 
 // export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserDetailsQuery } = authApi
+export const { useGetUserDetailsQuery, useToggleFavoriteProductMutation } =
+  authApi

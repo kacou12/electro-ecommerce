@@ -45,7 +45,7 @@ export interface DataUserToken {
 
 export interface UserState {
   loading: boolean
-  userInfo: DataUserToken | null
+  userInfo: User | null
   userToken: string | null
   error: any | null
   success: boolean

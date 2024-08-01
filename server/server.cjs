@@ -16,12 +16,7 @@ server.use(jsonServerAuth)
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser)
 
-// Add custom routes before JSON Server router
-server.post('/favorites', async (req, res) => {
-  // server.patch()
-  // const data = res.jsonp(req.query)
-  // { productId: '12', userId: 'auiaap' }
-  // console.log(req.body)
+server.post('/favorite', async (req, res) => {
   const productSlug = req.body.productSlug
 
   if (
@@ -83,6 +78,41 @@ server.post('/favorites', async (req, res) => {
     })
 
   // next()
+})
+
+server.get('/user-data', async (req, res) => {
+  if (
+    req.headers.authorization === undefined ||
+    req.headers.authorization.split(' ')[0] !== 'Bearer'
+  ) {
+    const status = 401
+    const message = 'Error in authorization format'
+    res.status(status).json({ status, message })
+    return
+  }
+  const token = req.headers.authorization.split(' ')[1]
+
+  // {
+  //   email: 'olivier@mail.com',
+  //   iat: 1722433136,
+  //   exp: 1722436736,
+  //   sub: 'uS8iXHn'
+  // }
+  const dataToken = JSON.parse(
+    Buffer.from(token.split('.')[1], 'base64').toString()
+  )
+  const userId = dataToken.sub
+
+  axios
+    .get(`http://localhost:3000/600/users/${userId}`, {
+      headers: { Authorization: req.headers.authorization }
+    })
+    .then((getRes) => {
+      res.json(getRes.data)
+    })
+    .catch((err) => {
+      res.status(500).json('fails request')
+    })
 })
 
 // Use default router

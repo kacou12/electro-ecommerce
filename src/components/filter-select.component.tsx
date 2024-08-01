@@ -25,7 +25,7 @@ export default function FilterSelect({
   // const [selected, setSelected] = useState(dataFilterBy[1])
 
   return (
-    <div className="mx-auto h-fit  w-72 ">
+    <div className="md:mx-auto h-fit w-full md:w-72 ">
       <Listbox value={selectedFilterBy} onChange={setSelectedFilterBy}>
         <ListboxButton
           className={clsx(

@@ -10,7 +10,7 @@ export const Footer = () => {
           {/* <!-- container --> */}
           <div className="centerContent px-4">
             {/* <!-- row --> */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
               <div className="footer">
                 <h3 className="text-lg text-white  font-semibold mb-4">
                   ABOUT US

@@ -2,6 +2,7 @@ import { CollectionType } from '@/interfaces/global.interface'
 import HugeSlider from '../sliders/huge-slider.component'
 import { useGetTopSellingProductsByCollectionSlugQuery } from '@/services/products.service'
 import { useState } from 'react'
+import { SkeletonProductCard } from '../loader/skeleton-product-card.component'
 
 interface TopSellingProps {
   children: React.ReactNode
@@ -13,6 +14,7 @@ export function TopSelling({ collections }: { collections: CollectionType[] }) {
   const {
     data: products,
     isFetching,
+    isSuccess,
     refetch
   } = useGetTopSellingProductsByCollectionSlugQuery(activeTabSlug)
   const changeCurrentTab = (slug: string) => {
@@ -26,7 +28,7 @@ export function TopSelling({ collections }: { collections: CollectionType[] }) {
         <li
           onClick={() => changeCurrentTab(collection.slug)}
           key={collection.id}
-          className={`${
+          className={`text-sm ${
             activeTabSlug == collection.slug && 'active'
           } cursor-pointer`}
         >
@@ -41,9 +43,9 @@ export function TopSelling({ collections }: { collections: CollectionType[] }) {
       {/* <!-- SECTION TOP SELLING --> */}
       <div className="centerContent">
         {/* <!-- container --> */}
-        <div className="container mx-auto px-4 py-8">
+        <div className="">
           {/* <!-- row --> */}
-          <div className="flex flex-wrap -mx-4">
+          <div className="flex flex-wrap">
             {/* <!-- section title --> */}
             <div className="w-full">
               <div className="section-title">
@@ -57,9 +59,10 @@ export function TopSelling({ collections }: { collections: CollectionType[] }) {
 
             {/* <!-- Products tab & slick --> */}
             <div className="w-full">
-              {isFetching ? (
-                <div>Loading by skeleton...</div>
-              ) : (
+              <SkeletonProductCard
+                isFetching={isFetching}
+              ></SkeletonProductCard>
+              {isSuccess && !isFetching && (
                 <HugeSlider products={products!}></HugeSlider>
               )}
             </div>

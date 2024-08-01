@@ -135,7 +135,7 @@ export const ProductTabs = () => {
 
             <div className="flex w-full">
               {/* <!-- Rating --> */}
-              <div className="w-1/4 border">
+              <div className="w-1/4 ">
                 {isSuccess && comments!.length > 0 && (
                   <div id="rating">
                     <div className="rating-avg">
@@ -237,11 +237,11 @@ export const ProductTabs = () => {
               {/* <!-- /Rating --> */}
 
               {/* <!-- Reviews --> */}
-              <div className="w-1/2 border">{showComments()}</div>
+              <div className="w-1/2 ">{showComments()}</div>
               {/* <!-- /Reviews --> */}
 
               {/* <!-- Review Form --> */}
-              <div className="w-1/4 border ml-5">
+              <div className="w-1/4  ml-5">
                 <RatingForm></RatingForm>
               </div>
               {/* <!-- /Review Form --> */}

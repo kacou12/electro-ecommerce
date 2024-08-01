@@ -2,7 +2,7 @@ export enum RouteEnum {
   DEFAULT = '/',
   GUEST = '/auth',
   AUTH = '/user',
-  TEST = '/category',
+  TEST = '/test',
   COLLECTION = '/:collectionSlug',
   CATEGORY = '/:collectionSlug/:categorySlug',
   PRODUCT_DETAILS = '/:collectionSlug/:categorySlug/:productSlug',

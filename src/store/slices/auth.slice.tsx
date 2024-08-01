@@ -11,7 +11,7 @@ const userToken = localStorage.getItem('userToken')
 
 const initialState: UserState = {
   loading: false,
-  userInfo: null as DataUserToken | null, // for user object
+  userInfo: null as User | null, // for user object
   userToken: null as string | null, // for storing the JWT
   error: null as any | null,
   success: false // for monitoring the registration process.
@@ -28,9 +28,8 @@ const authSlice = createSlice({
       state.userToken = null
       state.error = null
     },
-    setCredentials: (state, { payload }: { payload: DataUserToken }) => {
+    setCredentials: (state, { payload }: { payload: User }) => {
       state.userInfo = payload
-      // state.userToken = payload.accessToken
     }
   },
 
@@ -54,11 +53,14 @@ const authSlice = createSlice({
       state.loading = true
       state.error = null
     }),
-      builder.addCase(UserLogin.fulfilled, (state, { payload }) => {
-        state.loading = false
-        state.userInfo = payload
-        state.userToken = payload.userToken
-      }),
+      builder.addCase(
+        UserLogin.fulfilled,
+        (state, { payload }: { payload: DataUserToken }) => {
+          state.loading = false
+          state.userInfo = payload.user
+          state.userToken = payload.accessToken
+        }
+      ),
       builder.addCase(UserLogin.rejected, (state, { payload }) => {
         state.loading = false
         state.error = payload

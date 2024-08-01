@@ -4,13 +4,8 @@ import {
   ProductType,
   QueryData
 } from '@/interfaces/global.interface'
+import { pause } from '@/utils/index.utils'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-
-const pause = (duration: number) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, duration)
-  })
-}
 
 // Define a service using a base URL and expected endpoints
 export const productApi = createApi({

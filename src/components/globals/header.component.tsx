@@ -19,8 +19,8 @@ export const Header = () => {
       <header>
         {/* <!-- TOP HEADER --> */}
         <div id="top-header" className="bg-gray-900 text-white py-2 ">
-          <div className=" flex justify-between items-center centerContent">
-            <ul className="header-links flex space-x-4">
+          <div className=" flex md:justify-between items-center centerContent flex-wrap justify-start  ">
+            <ul className="header-links flex space-x-4  flex-wrap">
               <li>
                 <a href="#" className="flex items-center">
                   <IoIosCall className="text-primary mr-1" /> +021-95-51-84
@@ -65,11 +65,11 @@ export const Header = () => {
         {/* <!-- MAIN HEADER --> */}
         <div id="header" className="bg-gray-800 text-white py-4">
           {/* <!-- container --> */}
-          <div className="centerContent">
+          <div className="centerContent ">
             {/* <!-- row --> */}
             <div className="flex flex-wrap items-center justify-between">
               {/* <!-- LOGO --> */}
-              <div className="w-full md:w-1/4 lg:w-1/6">
+              <div className="w-full md:w-1/4 lg:w-[30%]">
                 <div className="header-logo">
                   <Link to={RouteEnum.DEFAULT} className="logo">
                     <img src="/img/logo.png" alt="Logo" className="h-12"></img>
@@ -79,13 +79,13 @@ export const Header = () => {
               {/* <!-- /LOGO --> */}
 
               {/* <!-- SEARCH BAR --> */}
-              <div className="w-full md:w-1/2 lg:w-2/4">
+              <div className="w-full md:w-1/2 lg:w-[45%]">
                 <SearchBar></SearchBar>
               </div>
               {/* <!-- /SEARCH BAR --> */}
 
               {/* <!-- ACCOUNT --> */}
-              <div className="w-full md:w-1/4 lg:w-1/6 flex justify-end clearfix">
+              <div className="w-full md:w-1/4 lg:w-[25%] flex  justify-center md:justify-end clearfix">
                 <div className="header-ctn flex items-center space-x-8">
                   {/* <!-- Wishlist --> */}
 
@@ -96,10 +96,10 @@ export const Header = () => {
                     >
                       <FaRegHeart size={20} />
 
-                      <span className="ml-2">Your Wishlist</span>
-                      {isAuth() && favorites.length > 0 && (
+                      <span className="ml-2 text-center">Your Wishlist</span>
+                      {isAuth() && favorites()!.length > 0 && (
                         <div className="absolute right-4 -top-3 inline-flex items-center justify-center w-5 h-5 text-xs font-thin text-white bg-primary rounded-full ">
-                          {favorites.length}
+                          {favorites()!.length}
                         </div>
                       )}
                     </a>

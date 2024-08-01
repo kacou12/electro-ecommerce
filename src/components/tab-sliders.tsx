@@ -44,7 +44,7 @@ export const TabSlider = <T extends QueryDefinition<any, any, any, any>>({
 
   return (
     <>
-      <div className="flex flex-wrap -mx-4">
+      <div className="flex flex-wrap">
         {/* <!-- section title --> */}
         <div className="w-full">
           <div className="section-title">

@@ -38,10 +38,7 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
         loader: homeLoader
       },
-      {
-        path: RouteEnum.TEST,
-        element: <Collection></Collection>
-      },
+
       {
         path: RouteEnum.COLLECTION,
         element: <Collection></Collection>,
@@ -56,8 +53,8 @@ export const router = createBrowserRouter([
       },
       {
         path: RouteEnum.PRODUCT_DETAILS,
-        element: <ProductDetails></ProductDetails>,
-        loader: productLoader
+        element: <ProductDetails></ProductDetails>
+        // loader: productLoader
       },
 
       {
@@ -70,6 +67,10 @@ export const router = createBrowserRouter([
         element: <Search></Search>
       }
     ]
+  },
+  {
+    path: RouteEnum.TEST,
+    element: <Test></Test>
   },
   {
     path: RouteEnum.LOGIN,

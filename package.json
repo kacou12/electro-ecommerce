@@ -14,7 +14,7 @@
     "email": "joaopaulomoraes@outlook.com"
   },
   "scripts": {
-    "dev": "concurrently \"yarn vite\" \"node server/server.cjs --watch db.json \" ",
+    "dev": "yarn concurrently \"yarn vite\" \"node server/server.cjs --watch db.json \" ",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "jserve": "yarn json-server --watch server/db.json",
@@ -38,6 +38,7 @@
     "@types/uuid": "^10.0.0",
     "axios": "^1.7.2",
     "clx": "^1.0.0",
+    "concurrently": "^8.2.2",
     "dayjs": "^1.11.11",
     "flowbite-react": "^0.10.1",
     "framer-motion": "^11.3.6",

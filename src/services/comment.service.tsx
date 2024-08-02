@@ -34,7 +34,7 @@ export const commentApi = createApi({
           createdAt: new Date()
         }
         return {
-          url: `comments`,
+          url: `addcomment`,
           method: 'POST',
           body: formatDate
         }

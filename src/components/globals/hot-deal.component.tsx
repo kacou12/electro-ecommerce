@@ -1,14 +1,21 @@
+import { RouteEnum } from '@/routes/route.enum'
 import { useCountDown } from '@reactuses/core'
 import { Button } from 'flowbite-react'
 import React from 'react'
+import { useNavigate } from 'react-router'
 
 export const HotDeal = () => {
   const now = new Date()
+  const navigate = useNavigate()
   const tomorrow = new Date()
   tomorrow.setDate(now.getDate() + 2)
   tomorrow.setHours(0, 0, 0, 0)
   const diffInSec = Math.floor((tomorrow.getTime() - now.getTime()) / 1000)
   const [hour, minute, second] = useCountDown(diffInSec)
+
+  const goToHotDeal = () => {
+    navigate(RouteEnum.HOTDEALS)
+  }
 
   return (
     <>
@@ -27,13 +34,13 @@ export const HotDeal = () => {
                   </div>
                 </li> */}
                 <li className="rounded-full flex p-8 justify-center items-center bg-primary">
-                  <div className="text-center px-1 flex flex-col w-10  h-10 border items-center">
+                  <div className="text-center px-1 flex flex-col w-10  h-10  items-center">
                     <p className="text-[22px] font-bold leading-none">{hour}</p>
                     <span className="text-[10px]">HOURS</span>
                   </div>
                 </li>
                 <li className="rounded-full flex p-8 justify-center items-center bg-primary">
-                  <div className="text-center px-1 flex flex-col w-10  h-10 border items-center">
+                  <div className="text-center px-1 flex flex-col w-10  h-10  items-center">
                     <p className="text-[22px] font-bold leading-none">
                       {minute}
                     </p>
@@ -41,7 +48,7 @@ export const HotDeal = () => {
                   </div>
                 </li>
                 <li className="rounded-full flex p-8 justify-center items-center bg-primary">
-                  <div className="text-center px-1 flex flex-col w-10  h-10 border items-center">
+                  <div className="text-center px-1 flex flex-col w-10  h-10  items-center">
                     <p className="text-[22px] font-bold leading-none">
                       {second}
                     </p>
@@ -63,7 +70,10 @@ export const HotDeal = () => {
                   SHOP NOW
                 </a> */}
 
-                <Button className="rounded-full mx-auto px-3 py-1 mt-2">
+                <Button
+                  onClick={goToHotDeal}
+                  className="rounded-full mx-auto px-3 py-1 mt-2"
+                >
                   SHOP NOW
                 </Button>
               </div>

@@ -9,6 +9,7 @@ import { Newsletter } from '@/components/globals/newsletter.component'
 import { ProductDetailSlick } from '@/components/products/product-detail-slick'
 import { ProductTabs } from '@/components/products/product-tabs.component'
 import { ProductType } from '@/interfaces/global.interface'
+import { useGetCommentsByProductSlugQuery } from '@/services/comment.service'
 import { useGetProductBySlugQuery } from '@/services/products.service'
 import { formatPrice, formatReductPrice } from '@/utils/index.utils'
 import { createContext, useContext } from 'react'
@@ -30,6 +31,11 @@ export default function ProductDetails() {
     isFetching,
     isSuccess
   } = useGetProductBySlugQuery(productSlug!)
+  const {
+    isSuccess: isSuccessComments,
+    data: comments,
+    isFetching: isFetchingComments
+  } = useGetCommentsByProductSlugQuery(productSlug!)
 
   return (
     <div>
@@ -75,9 +81,15 @@ export default function ProductDetails() {
                       </div>
                       <div className="product-rating">
                         <LocalRating rate={product.rating ?? 0}></LocalRating>
-                        {product.rating == null && (
+
+                        {product.rating == null ? (
                           <span className="text-sm text-gray-500">
                             (Pas d'avis disponibles)
+                          </span>
+                        ) : (
+                          <span className="text-sm text-gray-500">
+                            ( {isSuccessComments && comments?.length} avis
+                            utilisateurs)
                           </span>
                         )}
                       </div>

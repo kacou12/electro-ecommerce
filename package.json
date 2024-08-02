@@ -14,7 +14,7 @@
     "email": "joaopaulomoraes@outlook.com"
   },
   "scripts": {
-    "dev": "concurrently \"yarn vite\" \"node server/server.cjs \" ",
+    "dev": "concurrently \"yarn vite\" \"node server/server.cjs --watch db.json \" ",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "jserve": "yarn json-server --watch server/db.json",
@@ -26,6 +26,7 @@
   "dependencies": {
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.4",
+    "@hookform/resolvers": "^3.9.0",
     "@reactuses/core": "^5.0.16",
     "@reduxjs/toolkit": "^2.2.5",
     "@tailwindui/react": "^0.1.1",
@@ -62,7 +63,8 @@
     "sass": "^1.77.5",
     "slick-carousel": "^1.8.1",
     "sort-by": "^1.2.0",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.6",

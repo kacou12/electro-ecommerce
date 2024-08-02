@@ -155,7 +155,9 @@ function search() {
   const showResult = () => {
     let skeletonElements: JSX.Element[] = []
     for (let index = 0; index < 9; index++) {
-      skeletonElements.push(<SkeletonProductLine></SkeletonProductLine>)
+      skeletonElements.push(
+        <SkeletonProductLine key={index}></SkeletonProductLine>
+      )
     }
     if (isFetching) {
       return (

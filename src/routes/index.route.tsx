@@ -80,22 +80,6 @@ export const router = createBrowserRouter([
     path: RouteEnum.REGISTER,
     element: <Register></Register>
   },
-  // {
-  //   path: RouteEnum.GUEST,
-  //   element: <Guest></Guest>,
-  //   ErrorBoundary: () => <PageError></PageError>,
-  //   // loader: authLoader,
-  //   children: [
-  //     {
-  //       path: RouteEnum.LOGIN,
-  //       element: <Login></Login>
-  //     },
-  //     {
-  //       path: RouteEnum.REGISTER,
-  //       element: <Register></Register>
-  //     }
-  //   ]
-  // },
   {
     path: RouteEnum.AUTH,
     element: <Auth></Auth>,

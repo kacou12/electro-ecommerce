@@ -1,6 +1,7 @@
 import { ProductType } from '@/interfaces/global.interface'
 import { FaFrancSign } from 'react-icons/fa6'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const ProdutLine = ({ product }: { product: ProductType }) => {
   const formatPrice = (price: number) =>
@@ -31,9 +32,12 @@ const ProdutLine = ({ product }: { product: ProductType }) => {
             {product.category.title}
           </p>
           <p className="product-name">
-            <a href="#" className="line-clamp-1">
+            <Link
+              to={`/${product.collection.slug}/${product.category.slug}/${product.slug}`}
+              className="line-clamp-1"
+            >
               {product.title}
-            </a>
+            </Link>
           </p>
           <h4 className="product-price font-bold ">
             <div className="flex items-center space-x-1 leading-none">

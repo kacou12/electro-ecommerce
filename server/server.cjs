@@ -11,7 +11,7 @@ server.db = router.db
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares)
-server.use(jsonServerAuth)
+
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser)
@@ -114,6 +114,46 @@ server.get('/user-data', async (req, res) => {
       res.status(500).json('fails request')
     })
 })
+server.post('/register', async (req, res, next) => {
+  console.log('test register')
+  req.body.favorites = []
+  next()
+})
+server.post('/addcomment', async (req, res) => {
+  console.log('test add comment')
+  let productSlug = req.body.productSlug
+  // console.log(req.body)
+  await axios.post(`http://localhost:3000/comments`, req.body)
+
+  const product = await axios
+    .get(`http://localhost:3000/products?slug=${productSlug}`)
+    .then((getRes) => {
+      return getRes.data[0]
+    })
+
+  const commentsProducts = await axios
+    .get(`http://localhost:3000/comments?productSlug=${productSlug}`)
+    .then((getRes) => {
+      return getRes.data
+    })
+
+  let rateMoy = commentsProducts.reduce((accumulate, current) => {
+    return accumulate + current.rate
+  }, 0)
+
+  let rateFinal = Math.ceil(rateMoy / commentsProducts.length)
+
+  try {
+    await axios.patch(`http://localhost:3000/products/${product.id}`, {
+      rating: rateFinal
+    })
+    res.json('success ')
+  } catch (error) {
+    res.status(500).json('fails add comments ')
+  }
+})
+
+server.use(jsonServerAuth)
 
 // Use default router
 server.use(router)

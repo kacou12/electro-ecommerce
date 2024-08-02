@@ -11,9 +11,10 @@ export const registerUser = createAsyncThunk(
   async (
     {
       firstName,
+      lastName,
       email,
       password
-    }: { firstName: string; email: string; password: string },
+    }: { firstName: string; lastName: string; email: string; password: string },
     { rejectWithValue }
   ) => {
     try {
@@ -24,16 +25,20 @@ export const registerUser = createAsyncThunk(
       }
       await axios.post<DataUserToken>(
         `${import.meta.env.VITE_BASE_URL}register`,
-        { firstName, email, password },
+        {
+          firstName,
+          lastName,
+          email,
+          password
+        },
         config
       )
-    } catch (error) {
-      // return custom error message from backend if present
-      //   if (error.response && error.response.data.message) {
-      //     return rejectWithValue(error.response.data.message)
-      //   } else {
-      //     return rejectWithValue(error.message)
-      //   }
+    } catch (err) {
+      console.log(err)
+
+      const error = err as AxiosError
+
+      return rejectWithValue(error.message)
     }
   }
 )

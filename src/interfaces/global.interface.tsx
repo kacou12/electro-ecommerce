@@ -55,7 +55,6 @@ export interface User {
   firstName: string
   lastName: string
   favorites: ProductType[]
-  phone: string
   email: string
 }
 export enum SortTypeEnum {

@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 import { cartsSelectors } from '@/store/slices/cart.slice'
 import { ProfileDropdown } from '../profile-dropdown'
 import { useAuth } from '@/hooks/useAuth'
+import { Drawer } from './drawer'
 
 export const Header = () => {
   const { isAuth, favorites } = useAuth()
@@ -69,7 +70,11 @@ export const Header = () => {
             {/* <!-- row --> */}
             <div className="flex flex-wrap items-center justify-between">
               {/* <!-- LOGO --> */}
-              <div className="w-full md:w-1/4 lg:w-[30%]">
+              <div className="w-full md:w-1/4 lg:w-[30%]  flex items-center">
+                <div className="mr-4 md:hidden">
+                  <Drawer></Drawer>
+                </div>
+                {/* <div className="header-logo"> */}
                 <div className="header-logo">
                   <Link to={RouteEnum.DEFAULT} className="logo">
                     <img src="/img/logo.png" alt="Logo" className="h-12"></img>

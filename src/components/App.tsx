@@ -24,9 +24,8 @@ export default function App() {
         pauseOnHover
         theme="colored"
         transition={Bounce}
-      />
+      ></ToastContainer>
       {/* Same as */}
-      <ToastContainer />
       <ScrollRestoration />
       {/* <!-- HEADER --> */}
       <Header></Header>
@@ -41,7 +40,7 @@ export default function App() {
       {/* END BREADCRUMB */}
 
       {/* CHILDREN */}
-      <div className="min-h-[calc(100%-225px)]">
+      <div className="min-h-[calc(100vh-225px)] ">
         <Outlet></Outlet>
       </div>
       {/* END CHILDREN */}

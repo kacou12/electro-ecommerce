@@ -87,7 +87,9 @@ export const SearchBar = () => {
           transition
           className="origin-top bg-white 
           shadow-2xl
-            w-[24%]
+            md:w-[22%]
+            lg:w-[30%]
+            w-[80%]
             transition-all duration-500 ease-out 
           empty:invisible 
           data-[closed]:translate-x-10

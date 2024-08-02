@@ -51,7 +51,9 @@ export default function AuthLayout() {
       {/* END BREADCRUMB */}
 
       {/* CHILDREN */}
-      <Outlet></Outlet>
+      <div className="min-h-[calc(100vh-225px)] ">
+        <Outlet></Outlet>
+      </div>
       {/* END CHILDREN */}
       {/* <!-- NEWSLETTER --> */}
       <Newsletter></Newsletter>

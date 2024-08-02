@@ -45,7 +45,7 @@ export function TopSelling({ collections }: { collections: CollectionType[] }) {
         {/* <!-- container --> */}
         <div className="">
           {/* <!-- row --> */}
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap ">
             {/* <!-- section title --> */}
             <div className="w-full">
               <div className="section-title">

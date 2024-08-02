@@ -13,7 +13,7 @@ export const productApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_URL,
     fetchFn: async (...args) => {
-      await pause(3000)
+      await pause(1000)
       return fetch(...args)
     }
   }),

@@ -33,7 +33,8 @@ export const PageError = () => {
     }
   }
   return (
-    <div>
+    <div className="centerContent flex flex-col items-center">
+      <img src="/img/404.png"></img>
       <h1>Oops!</h1>
       <h2>{error.status}</h2>
       <p>{error.statusText}</p>

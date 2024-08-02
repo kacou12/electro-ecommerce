@@ -71,7 +71,7 @@ export const Header = () => {
             <div className="flex flex-wrap items-center justify-between">
               {/* <!-- LOGO --> */}
               <div className="w-full md:w-1/4 lg:w-[30%]  flex items-center">
-                <div className="mr-4 md:hidden">
+                <div className="mr-4 hidden">
                   <Drawer></Drawer>
                 </div>
                 {/* <div className="header-logo"> */}

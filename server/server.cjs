@@ -1,6 +1,7 @@
 const jsonServer = require('json-server')
 const jsonServerAuth = require('json-server-auth')
 const axios = require('axios')
+var jwt = require('jsonwebtoken')
 // import * as jsonServer from 'json-server'
 // import * as jsonServerAuth from 'json-server-auth'
 const server = jsonServer.create()
@@ -74,7 +75,7 @@ server.post('/favorite', async (req, res) => {
       res.json('success ')
     })
     .catch((err) => {
-      res.status(500).json('fails request')
+      res.status(401).json('fails request')
     })
 
   // next()
@@ -111,14 +112,16 @@ server.get('/user-data', async (req, res) => {
       res.json(getRes.data)
     })
     .catch((err) => {
-      res.status(500).json('fails request')
+      res.status(401).json('fails request')
     })
 })
+
 server.post('/register', async (req, res, next) => {
   console.log('test register')
   req.body.favorites = []
   next()
 })
+
 server.post('/addcomment', async (req, res) => {
   console.log('test add comment')
   let productSlug = req.body.productSlug
@@ -149,9 +152,38 @@ server.post('/addcomment', async (req, res) => {
     })
     res.json('success ')
   } catch (error) {
-    res.status(500).json('fails add comments ')
+    res.status(401).json('fails add comments ')
   }
 })
+
+server.post('/refreshToken', async (req, res) => {
+  let jwtData = jwt.decode(req.body.accessToken)
+  let jwtResult = jwt.sign(
+    {
+      email: jwtData.email,
+      sub: jwtData.sub,
+      exp: Math.floor(Date.now() / 1000) + 60 * 60
+    },
+    'json-server-auth-123456'
+  )
+  return res.json({ accessToken: jwtResult })
+})
+
+// "use strict";
+// Object.defineProperty(exports, "__esModule", { value: true });
+// exports.MIN_PASSWORD_LENGTH = exports.EMAIL_REGEX = exports.SALT_LENGTH = exports.JWT_EXPIRES_IN = exports.JWT_SECRET_KEY = void 0;
+// exports.JWT_SECRET_KEY = 'json-server-auth-123456';
+// exports.JWT_EXPIRES_IN = '1h';
+// exports.SALT_LENGTH = 10;
+// exports.EMAIL_REGEX = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+// exports.MIN_PASSWORD_LENGTH = 4;
+
+// {
+//   "email": "olivier@mail.com",
+//   "iat": 1722718569,
+//   "exp": 1722722169,
+//   "sub": "uS8iXHn"
+// }
 
 server.use(jsonServerAuth)
 

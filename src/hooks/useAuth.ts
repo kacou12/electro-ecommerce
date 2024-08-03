@@ -9,9 +9,10 @@ import React, { useEffect } from 'react'
 
 export const useAuth = () => {
   const { loading, error, userInfo } = useAppSelector((state) => state.auth)
+
   const dispatch = useAppDispatch()
   const isAuth = () => {
-    return userInfo ? true : false
+    return !!userInfo
   }
 
   const { data, isFetching } = useGetUserDetailsQuery(undefined, {
@@ -31,7 +32,6 @@ export const useAuth = () => {
 
   const isFavorite = (productId: string) => {
     if (!isAuth()) return false
-    console.log(userInfo!.favorites.map((favProd) => favProd.id))
     return userInfo!.favorites.map((favProd) => favProd.id).includes(productId)
   }
 

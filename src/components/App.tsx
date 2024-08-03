@@ -10,6 +10,7 @@ import { ToastContainer, Bounce } from 'react-toastify'
 
 export default function App() {
   const { pathname } = useLocation()
+  console.log('re render App')
   return (
     <>
       <ToastContainer

@@ -1,8 +1,9 @@
 import { RouteEnum } from '@/routes/route.enum'
 import { useGetAllCollectionsQuery } from '@/services/collections.service'
+import { memo } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 
-export const Navigation = () => {
+export const Navigation = memo(() => {
   const { data: collections } = useGetAllCollectionsQuery()
   const { collectionSlug } = useParams()
   const { pathname } = useLocation()
@@ -54,4 +55,4 @@ export const Navigation = () => {
       {/* <!-- /NAVIGATION --> */}
     </>
   )
-}
+})

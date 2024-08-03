@@ -1,7 +1,7 @@
 import { CollectionType } from '@/interfaces/global.interface'
 import { Link } from 'react-router-dom'
 
-export function Collection({ collection }: { collection: CollectionType }) {
+export const Collection = ({ collection }: { collection: CollectionType }) => {
   return (
     <>
       {/* <!-- shop --> */}

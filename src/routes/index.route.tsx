@@ -7,12 +7,9 @@ import { PageError } from '@/views/page-error'
 import { categoryLoader } from './loaders/category.loader'
 import { collectionLoader } from './loaders/collection.loader'
 import { homeLoader } from './loaders/home.loader'
-import { productLoader } from './loaders/product.loader'
 
 // LAYOUT
 import Auth from '@/layouts/auth.layout'
-import Guest from '@/layouts/guest.layout'
-import { authLoader } from './loaders/auth.loader'
 
 const ProductDetails = lazy(() => import('@/views/product-details.view'))
 const Home = lazy(() => import('@/views/home.view'))

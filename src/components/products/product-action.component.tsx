@@ -19,7 +19,6 @@ export const ProductAction = ({
   hiddenCart?: boolean
 }) => {
   const navigate = useNavigate()
-  const { isFavorite } = useAuth()
 
   const {
     addToCart,

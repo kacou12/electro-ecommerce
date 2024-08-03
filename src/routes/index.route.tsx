@@ -16,7 +16,7 @@ import { authLoader } from './loaders/auth.loader'
 
 const ProductDetails = lazy(() => import('@/views/product-details.view'))
 const Home = lazy(() => import('@/views/home.view'))
-const App = lazy(() => import('@/components/app'))
+const App = lazy(() => import('@/components/App'))
 const Category = lazy(() => import('@/views/category.view'))
 const Collection = lazy(() => import('@/views/collection.view'))
 const HotDeals = lazy(() => import('@/views/hot-deals.view'))
@@ -43,13 +43,13 @@ export const router = createBrowserRouter([
       {
         path: RouteEnum.COLLECTION,
         element: <Collection></Collection>,
-        // ErrorBoundary: () => <PageError></PageError>,
+        ErrorBoundary: () => <PageError></PageError>,
         loader: collectionLoader
       },
       {
         path: RouteEnum.CATEGORY,
         element: <Category></Category>,
-        // ErrorBoundary: () => <PageError></PageError>,
+        ErrorBoundary: () => <PageError></PageError>,
         loader: categoryLoader
       },
       {

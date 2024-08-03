@@ -11,9 +11,15 @@ export const CommentLine = ({ comment }: { comment: CommentType }) => {
             {comment.fullName}
           </h5>
           <p className="date">
-            {new Intl.DateTimeFormat('fr-FR').format(
-              new Date(comment.createdAt)
-            )}
+            {new Intl.DateTimeFormat('fr-FR', {
+              // weekday: 'short',
+              year: 'numeric',
+              month: 'numeric',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: 'numeric',
+              hourCycle: 'h23'
+            }).format(new Date(comment.createdAt))}
           </p>
           <div className="review-rating">
             <LocalRating rate={comment.rate}></LocalRating>

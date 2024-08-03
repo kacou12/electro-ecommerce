@@ -1,4 +1,4 @@
-import { ProductType } from '@/interfaces/global.interface'
+import { CommentType, ProductType } from '@/interfaces/global.interface'
 import dayjs from 'dayjs'
 
 export function classNames(...classes: unknown[]): string {
@@ -38,3 +38,12 @@ export const pause = (duration: number) => {
     setTimeout(resolve, duration)
   })
 }
+
+export const sortByDate = (comments: CommentType[]) =>
+  comments
+    .sort((a, b) =>
+      dayjs(a.createdAt.toString()).isAfter(dayjs(b.createdAt.toString()))
+        ? 1
+        : -1
+    )
+    .reverse()

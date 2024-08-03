@@ -33,6 +33,7 @@ export interface CartType {
 export interface NullableCommentType {
   id?: string
   fullName: string
+  email: string
   message: string
   createdAt?: Date
   rate: number

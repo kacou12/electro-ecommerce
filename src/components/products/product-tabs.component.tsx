@@ -13,6 +13,7 @@ import { CommentMain } from '../comment/comment-main.component'
 import { RatingForm } from '../forms/rating-form.component'
 import { LocalRating } from '../globals/local-rating'
 import { useProductContext } from '@/views/product-details.view'
+import { sortByDate } from '@/utils/index.utils'
 
 export const ProductTabs = () => {
   const product = useProductContext()!
@@ -40,7 +41,9 @@ export const ProductTabs = () => {
           <div className="w-10 h-10 border-4 border-primary rounded-full animate-spin border-t-transparent"></div>
         </div>
       )
-    if (isSuccess) return <CommentMain comments={comments}></CommentMain>
+
+    if (isSuccess)
+      return <CommentMain comments={sortByDate([...comments])}></CommentMain>
   }
   return (
     <TabGroup selectedIndex={tabIndex} onChange={setTabIndex}>

@@ -8,8 +8,6 @@ export const Navigation = () => {
   const { pathname } = useLocation()
 
   const listNav = () => {
-    console.log(collections)
-
     return collections?.map((collection) => (
       <li
         className={`${collectionSlug == collection.slug && 'active'}`}

@@ -42,5 +42,8 @@ export const authApi = createApi({
 
 // export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserDetailsQuery, useToggleFavoriteProductMutation } =
-  authApi
+export const {
+  useGetUserDetailsQuery,
+  useToggleFavoriteProductMutation,
+  useLazyGetUserDetailsQuery
+} = authApi

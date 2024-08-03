@@ -14,7 +14,7 @@
     "email": "joaopaulomoraes@outlook.com"
   },
   "scripts": {
-    "dev": "yarn concurrently \"yarn vite\" \"node server/server.cjs --watch db.json \" ",
+    "dev": "yarn concurrently \"yarn vite\" \"node server/server.cjs \" ",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "jserve": "yarn json-server --watch server/db.json",

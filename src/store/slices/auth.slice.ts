@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '..'
 import axios, { AxiosError } from 'axios'
 import { registerUser, UserLogin } from '../actions/auth.actions'
@@ -76,3 +76,11 @@ const authSlice = createSlice({
 
 export const { logout, setCredentials, setRefreshToken } = authSlice.actions
 export const authReducer = authSlice.reducer
+
+export const selectFavoriteById = createSelector(
+  [
+    (state: RootState) => state.auth.userInfo?.favorites,
+    (state: RootState, favoriteId: string) => favoriteId
+  ],
+  (dataMap, favoriteId) => dataMap?.find((fav) => fav.id == favoriteId)
+)

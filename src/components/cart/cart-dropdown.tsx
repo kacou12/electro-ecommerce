@@ -8,6 +8,7 @@ import { formatPrice } from '@/utils/index.utils'
 import { useCart } from '@/hooks/useCart'
 import { CartType } from '@/interfaces/global.interface'
 import { IoCartOutline } from 'react-icons/io5'
+import { useAppSelector } from '@/store'
 
 export const CartDropdown = () => {
   const { carts, subTotalCarts } = useCart()

@@ -10,6 +10,7 @@ import { homeLoader } from './loaders/home.loader'
 
 // LAYOUT
 import Auth from '@/layouts/auth.layout'
+import Default from '@/layouts/default.layout'
 
 const ProductDetails = lazy(() => import('@/views/product-details.view'))
 const Home = lazy(() => import('@/views/home.view'))
@@ -27,66 +28,67 @@ const Test = lazy(() => import('@/views/Test.view'))
 export const router = createBrowserRouter([
   {
     path: RouteEnum.DEFAULT,
-    element: <App></App>,
-    ErrorBoundary: () => <PageError></PageError>,
+    element: <Default></Default>,
+    ErrorBoundary: () => <PageError />,
+
     children: [
       {
         path: RouteEnum.DEFAULT,
-        element: <Home></Home>,
+        element: <Home />,
         loader: homeLoader,
         index: true
       },
 
       {
         path: RouteEnum.COLLECTION,
-        element: <Collection></Collection>,
-        ErrorBoundary: () => <PageError></PageError>,
+        element: <Collection />,
+        ErrorBoundary: () => <PageError />,
         loader: collectionLoader
       },
       {
         path: RouteEnum.CATEGORY,
-        element: <Category></Category>,
-        ErrorBoundary: () => <PageError></PageError>,
+        element: <Category />,
+        ErrorBoundary: () => <PageError />,
         loader: categoryLoader
       },
       {
         path: RouteEnum.PRODUCT_DETAILS,
-        element: <ProductDetails></ProductDetails>
+        element: <ProductDetails />
         // loader: productLoader
       },
 
       {
         path: RouteEnum.HOTDEALS,
-        element: <HotDeals></HotDeals>
+        element: <HotDeals />
         // loader: hotDealLoader
       },
       {
         path: RouteEnum.SEARCH,
-        element: <Search></Search>
+        element: <Search />
       }
     ]
   },
   {
     path: RouteEnum.TEST,
-    element: <Test></Test>
+    element: <Test />
   },
   {
     path: RouteEnum.LOGIN,
-    element: <Login></Login>
+    element: <Login />
   },
   {
     path: RouteEnum.REGISTER,
-    element: <Register></Register>
+    element: <Register />
   },
   {
     path: RouteEnum.AUTH,
-    element: <Auth></Auth>,
-    ErrorBoundary: () => <PageError></PageError>,
+    element: <Auth />,
+    ErrorBoundary: () => <PageError />,
     // loader: authLoader,
     children: [
       {
         path: RouteEnum.PROFIL,
-        element: <Profil></Profil>
+        element: <Profil />
       }
     ]
   }

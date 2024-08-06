@@ -6,6 +6,7 @@ import { IoMdAdd, IoMdRemove } from 'react-icons/io'
 import { useNavigate } from 'react-router'
 import { LocalRating } from '../globals/local-rating'
 import { ProductAction } from './product-action.component'
+import { Link } from 'react-router-dom'
 
 const ProductLineCard = ({ product }: { product: ProductType }) => {
   const navigate = useNavigate()
@@ -33,7 +34,11 @@ const ProductLineCard = ({ product }: { product: ProductType }) => {
         <div className="product-body">
           <p className="product-category">{product.category.title}</p>
           <h3 className="product-name  line-clamp-1">
-            <a href="#">{product.title}</a>
+            <Link
+              to={`/${product.collection.slug}/${product.category.slug}/${product.slug}`}
+            >
+              {product.title}
+            </Link>
           </h3>
           <h4 className="product-price font-bold">
             <div className="flex  items-end justify-center space-x-1 leading-none">

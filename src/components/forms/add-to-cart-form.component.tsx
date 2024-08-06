@@ -1,4 +1,5 @@
 import { useCart } from '@/hooks/useCart'
+import { useCartLine } from '@/hooks/useCartLine'
 import { ProductType } from '@/interfaces/global.interface'
 import { useUpdate } from '@reactuses/core'
 import { Transition } from '@tailwindui/react'
@@ -13,7 +14,7 @@ export const AddToCartForm = ({ product }: { product: ProductType }) => {
     isInCart,
     addToCart,
     getCartLineFromProduct: currentCartLine
-  } = useCart()
+  } = useCartLine(product.id)
   const [quantity, setQuantity] = useState(1)
   const decreaseQty = () => {
     if (quantity > 0) {
@@ -25,18 +26,18 @@ export const AddToCartForm = ({ product }: { product: ProductType }) => {
   }
 
   useEffect(() => {
-    if (!isInCart({ product })) {
+    if (!isInCart) {
       setQuantity(() => 1)
     }
-  }, [isInCart({ product })])
+  }, [isInCart])
 
   return (
     <>
-      {isInCart({ product }) ? (
+      {isInCart() ? (
         <section className="flex items-center mt-5">
           <div className="increase-qty">
             <Button
-              onClick={() => decreaseOrRemoveFromCart({ product })}
+              onClick={() => decreaseOrRemoveFromCart()}
               className="w-8 h-8 rounded-md flex justify-center items-center"
             >
               <IoMdRemove className="w-6 h-6" />
@@ -45,12 +46,12 @@ export const AddToCartForm = ({ product }: { product: ProductType }) => {
 
           <div>
             <span className="product-qty px-4 font-bold">
-              {currentCartLine({ product })!.quantity}
+              {currentCartLine!.quantity}
             </span>
           </div>
           <div className="decrease-qty ">
             <Button
-              onClick={() => increaseQuantityCartLine({ product })}
+              onClick={() => increaseQuantityCartLine()}
               className="w-8 h-8 rounded-md flex justify-center items-center"
             >
               <IoMdAdd className="w-6 h-6 text-white" />

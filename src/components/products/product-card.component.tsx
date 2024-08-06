@@ -4,17 +4,11 @@ import { useNavigate } from 'react-router'
 import { LocalRating } from '../globals/local-rating'
 import { ProductAction } from './product-action.component'
 import { useCart } from '@/hooks/useCart'
+import { Link } from 'react-router-dom'
+import { useCartLine } from '@/hooks/useCartLine'
 // import dayjs from 'dayjs'
 
 const ProductCard = ({ product }: { product: ProductType }) => {
-  const navigate = useNavigate()
-  const goToDetailPage = (product: ProductType) => {
-    setTimeout(() => {
-      navigate(
-        `/${product.collection.slug}/${product.category.slug}/${product.slug}`
-      )
-    }, 500)
-  }
   const imgError = (img: string) => {
     return img.replace('/r250/', '/r150/')
   }
@@ -23,8 +17,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
     //@ts-ignore
     ev.target.src = imgError(product.images[0])
   }
-
-  const { isInCart, addToCart } = useCart()
+  const { isInCart, addToCart } = useCartLine(product.id)
   return (
     <div>
       <div className="product">
@@ -40,7 +33,11 @@ const ProductCard = ({ product }: { product: ProductType }) => {
         <div className="product-body">
           <p className="product-category">{product.category.title}</p>
           <h3 className="product-name line-clamp-1">
-            <a href="#">{product.title}</a>
+            <Link
+              to={`/${product.collection.slug}/${product.category.slug}/${product.slug}`}
+            >
+              {product.title}
+            </Link>
           </h3>
           <h4 className="product-price font-bold">
             <div className="flex  items-end justify-center space-x-1 leading-none">
@@ -66,7 +63,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
           </div>
           <ProductAction hiddenCart={true} product={product}></ProductAction>
         </div>
-        <div className={` ${isInCart({ product }) && 'hidden'}  add-to-cart`}>
+        <div className={` ${isInCart() && 'hidden'}  add-to-cart`}>
           <button
             onClick={() => addToCart({ product })}
             className="add-to-cart-btn"

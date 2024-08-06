@@ -1,15 +1,11 @@
-import React from 'react'
-import { IoIosCall } from 'react-icons/io'
-import { FaRegHeart } from 'react-icons/fa'
-import { IoCartOutline } from 'react-icons/io5'
-import { CartDropdown } from '../cart/cart-dropdown'
-import { Link } from 'react-router-dom'
-import { RouteEnum } from '@/routes/route.enum'
-import { SearchBar } from '../searchbar'
-import { useSelector } from 'react-redux'
-import { cartsSelectors } from '@/store/slices/cart.slice'
-import { ProfileDropdown } from '../profile-dropdown'
 import { useAuth } from '@/hooks/useAuth'
+import { RouteEnum } from '@/routes/route.enum'
+import { FaRegHeart } from 'react-icons/fa'
+import { IoIosCall } from 'react-icons/io'
+import { Link } from 'react-router-dom'
+import { CartDropdown } from '../cart/cart-dropdown'
+import { ProfileDropdown } from '../profile-dropdown'
+import { SearchBar } from '../searchbar.component'
 import { Drawer } from './drawer'
 
 export const Header = () => {
@@ -23,20 +19,20 @@ export const Header = () => {
           <div className=" flex md:justify-between items-center centerContent flex-wrap justify-start  ">
             <ul className="header-links flex space-x-4  flex-wrap">
               <li>
-                <a href="#" className="flex items-center">
+                <Link to={RouteEnum.DEFAULT} className="flex items-center">
                   <IoIosCall className="text-primary mr-1" /> +021-95-51-84
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="flex items-center">
+                <Link to={RouteEnum.DEFAULT} className="flex items-center">
                   <i className="fa fa-envelope mr-1"></i> email@email.com
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="flex items-center">
+                <Link to={RouteEnum.DEFAULT} className="flex items-center">
                   <i className="fa-solid fa-location-dot mr-1"></i> 1734
                   Stonecoal Road
-                </a>
+                </Link>
               </li>
             </ul>
             <ul className="header-links flex space-x-4">

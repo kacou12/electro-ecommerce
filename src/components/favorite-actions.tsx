@@ -13,6 +13,8 @@ import { Button, Spinner } from 'flowbite-react'
 import { useAuth } from '@/hooks/useAuth'
 import { ProductType } from '@/interfaces/global.interface'
 import { useToggle } from '@reactuses/core'
+import { useAppSelector } from '@/store'
+import { selectFavoriteById } from '@/store/slices/auth.slice'
 
 export const FavoriteContext = createContext<{
   toggleFavoriteProduct: () => Promise<void>
@@ -31,12 +33,17 @@ export const FavoriteActions = ({
   children: ReactNode
 }) => {
   const [open, setOpen] = useState(false)
-  const { isFavorite, isAuth } = useAuth()
-  const [on, toggle] = useToggle(isFavorite(product.id))
+
+  const isFavorite = useAppSelector((state) =>
+    selectFavoriteById(state, product.id)
+  )
+
+  const isAuth = useAppSelector((state) => !!state.auth.userInfo)
+  const [on, toggle] = useToggle(!!isFavorite)
   const [initToggleFavorite, { isSuccess, isLoading }] =
     useToggleFavoriteProductMutation()
   const toggleFavoriteProduct = async () => {
-    if (!isAuth()) {
+    if (!isAuth) {
       return setOpen(() => true)
     }
     toggle()

@@ -3,8 +3,10 @@ import {
   createEntityAdapter,
   createSlice,
   configureStore,
-  PayloadAction
+  PayloadAction,
+  createSelector
 } from '@reduxjs/toolkit'
+
 import { RootState, store } from '..'
 
 const cartsAdapter = createEntityAdapter({
@@ -60,3 +62,6 @@ export const cartsReducer = cartsSlice.reducer
 export const cartsSelectors = cartsAdapter.getSelectors<RootState>(
   (state) => state.carts
 )
+
+export const getCartLine = (cartId: string) =>
+  cartsSelectors.selectById(store.getState(), cartId) as CartType | undefined

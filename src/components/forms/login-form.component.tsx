@@ -1,8 +1,9 @@
 import { RouteEnum } from '@/routes/route.enum'
-import { useAppDispatch, useAppSelector } from '@/store'
+import { useAppDispatch } from '@/store'
 import { UserLogin } from '@/store/actions/auth.actions'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Spinner, TextInput } from 'flowbite-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -15,8 +16,8 @@ const loginschema = yup
   .required()
 
 export const LoginForm = () => {
-  const { loading, error, userInfo } = useAppSelector((state) => state.auth)
   const dispatch = useAppDispatch()
+  const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -26,11 +27,13 @@ export const LoginForm = () => {
   })
 
   const submitForm = async (data: any) => {
+    setIsLoading(() => true)
     try {
       await dispatch(UserLogin(data)).unwrap()
     } catch (err) {
-      console.log('error login')
       toast.error('Incorrect email or password')
+    } finally {
+      setIsLoading(() => false)
     }
   }
   return (
@@ -78,9 +81,13 @@ export const LoginForm = () => {
         <Button
           type="submit"
           className="button w-full mx-auto  mt-8"
-          disabled={loading}
+          disabled={isLoading}
         >
-          {loading ? <Spinner aria-label="Default status example" /> : 'Login'}
+          {isLoading ? (
+            <Spinner aria-label="Default status example" />
+          ) : (
+            'Login'
+          )}
         </Button>
         <div className="flex justify-end mt-5">
           <Link to={RouteEnum.REGISTER} className="text-sm">

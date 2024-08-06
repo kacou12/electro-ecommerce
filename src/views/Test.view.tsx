@@ -1,4 +1,3 @@
-import { DefaultLayout } from '@/layouts/default'
 import React, { useState } from 'react'
 import Slider, { Settings } from 'react-slick'
 

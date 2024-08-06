@@ -24,7 +24,7 @@ export const ProfileDropdown = () => {
                 <span className="sr-only">Open user menu</span>
 
                 <li>
-                  <a href="#" className={`flex items-center`}>
+                  <span className={`flex items-center`}>
                     <i className="fa-regular fa-user mr-1"></i>
                     <span
                       className={`${
@@ -33,7 +33,7 @@ export const ProfileDropdown = () => {
                     >
                       My Account
                     </span>
-                  </a>
+                  </span>
                 </li>
               </>
             )}

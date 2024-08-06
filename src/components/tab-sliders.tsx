@@ -36,7 +36,7 @@ export const TabSlider = <T extends QueryDefinition<any, any, any, any>>({
             activeTabSlug == dataLine.slug && 'active'
           } cursor-pointer`}
         >
-          <a href={`#tab${i + 1}`}>{dataLine.title}</a>
+          <span>{dataLine.title}</span>
         </li>
       )
     })

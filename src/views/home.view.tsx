@@ -7,9 +7,12 @@ import { TopSelling } from '@/components/globals/top-selling.component'
 import dayjs from 'dayjs'
 
 import { useGetAllCollectionsQuery } from '@/services/collections.service'
+import { memo, Profiler } from 'react'
 
 function Home() {
   const { data: collections } = useGetAllCollectionsQuery()
+
+  console.log('render Home')
 
   const showCollections = () => {
     const elements = []
@@ -20,21 +23,21 @@ function Home() {
       <Collection key={coll.id} collection={coll}></Collection>
     ))
   }
+
   return (
     <>
       <div>
         {/* <!-- SECTION COLLECTION --> */}
         <div className="section centerContent">
-          {/* <!-- container --> */}
           <div className="mx-auto  py-8">
             {/* <!-- row --> */}
             <div className="flex flex-wrap">{showCollections()}</div>
             {/* <!-- /row --> */}
           </div>
-          {/* <!-- /container --> */}
         </div>
         {/* <!-- /SECTION  COLLECTION--> */}
         {/* <!-- SECTION NEW PRODUCTS --> */}
+
         <NewProducts collections={collections!}></NewProducts>
         {/* <!-- /SECTION NEW PRODUCTS --> */}
         {/* <!-- HOT DEAL SECTION --> */}

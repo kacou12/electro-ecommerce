@@ -1,21 +1,20 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { registerUser } from '@/store/actions/auth.actions'
-import { useAppDispatch, useAppSelector } from '@/store'
-import { Button, Spinner, TextInput } from 'flowbite-react'
-import GuestLayout from '@/layouts/guest.layout'
-import { Link, useNavigate } from 'react-router-dom'
 import { RouteEnum } from '@/routes/route.enum'
+import { useAppDispatch } from '@/store'
+import { registerUser } from '@/store/actions/auth.actions'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+import { Button, Spinner, TextInput } from 'flowbite-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import * as yup from 'yup'
 
 const registerSchema = yup
   .object({
     firstName: yup.string().required('firstName is required'),
     lastName: yup.string().required('lastName is required'),
     email: yup.string().email().required(),
-    password: yup.string().required('Password is required'),
+    password: yup.string().min(8).required('Password is required'),
     confirmPassword: yup
       .string()
       //@ts-ignore
@@ -24,9 +23,9 @@ const registerSchema = yup
   .required()
 
 export const RegisterForm = () => {
-  const { loading, error, userInfo } = useAppSelector((state) => state.auth)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const [isLoading, setIsLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -36,6 +35,7 @@ export const RegisterForm = () => {
   })
 
   const submitForm = async (data: any) => {
+    setIsLoading(() => true)
     try {
       await dispatch(registerUser(data)).unwrap()
 
@@ -45,9 +45,9 @@ export const RegisterForm = () => {
         }
       })
     } catch (err) {
-      console.log('error ')
-
       toast.error('please check the information provided ')
+    } finally {
+      setIsLoading(() => false)
     }
   }
 
@@ -147,9 +147,9 @@ export const RegisterForm = () => {
         <Button
           type="submit"
           className="button w-full mx-auto  "
-          disabled={loading}
+          disabled={isLoading}
         >
-          {loading ? (
+          {isLoading ? (
             <Spinner aria-label="Default status example" />
           ) : (
             'Register'

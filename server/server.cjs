@@ -156,8 +156,9 @@ server.post('/addcomment', async (req, res) => {
   }
 })
 
-server.post('/refreshToken', async (req, res) => {
-  let jwtData = jwt.decode(req.body.accessToken)
+server.get('/refreshToken', async (req, res) => {
+  const token = req.headers.authorization.split(' ')[1]
+  let jwtData = jwt.decode(token)
   let jwtResult = jwt.sign(
     {
       email: jwtData.email,

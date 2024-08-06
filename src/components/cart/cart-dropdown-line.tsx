@@ -1,17 +1,18 @@
 import { useCart } from '@/hooks/useCart'
+import { useCartLine } from '@/hooks/useCartLine'
 import { CartType } from '@/interfaces/global.interface'
 import { formatPrice, formatReductPrice, pause } from '@/utils/index.utils'
 import { Transition } from '@headlessui/react'
 import { useState } from 'react'
 
 export const CartDropdownLine = ({ cartLine }: { cartLine: CartType }) => {
-  const { removeCartLine } = useCart()
+  const { removeCartLine } = useCartLine(cartLine.id)
   const time = 700
   const [open, setOpen] = useState(true)
   const goRemove = async () => {
     setOpen(() => false)
     await pause(time + 100)
-    removeCartLine({ product: cartLine.product })
+    removeCartLine()
   }
   return (
     <>

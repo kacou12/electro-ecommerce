@@ -328,12 +328,12 @@ body {
     margin-right: 0px;
   }
   
-  .section-tab-nav li a {
+  .section-tab-nav li span {
     font-weight: 700;
     color: #8D99AE;
   }
   
-  .section-tab-nav li a:after {
+  .section-tab-nav li span:after {
     content: "";
     display: block;
     width: 0%;
@@ -343,11 +343,11 @@ body {
     transition: 0.2s all;
   }
   
-  .section-tab-nav li.active a {
+  .section-tab-nav li.active span {
     color: $Primary;
   }
   
-  .section-tab-nav li a:hover:after, .section-tab-nav li a:focus:after, .section-tab-nav li.active a:after {
+  .section-tab-nav li span:hover:after, .section-tab-nav li span:focus:after, .section-tab-nav li.active span:after {
     width: 100%;
   }
   

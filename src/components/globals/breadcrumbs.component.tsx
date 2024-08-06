@@ -1,9 +1,11 @@
 import { RouteEnum } from '@/routes/route.enum'
 import React, { Fragment } from 'react'
-import { UIMatch, useMatches } from 'react-router'
+import { UIMatch, useLocation, useMatches } from 'react-router'
 import { Link } from 'react-router-dom'
 
 export const Breadcrumbs = () => {
+  const { pathname } = useLocation()
+
   let matches = useMatches() as UIMatch<string, string>[]
   // console.log(matches)
 
@@ -31,7 +33,6 @@ export const Breadcrumbs = () => {
     finalData.push(current!)
     i++
   }
-  // console.log(finalData)
 
   return (
     <>

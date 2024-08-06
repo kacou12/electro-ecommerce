@@ -7,6 +7,7 @@ export const Navigation = memo(() => {
   const { data: collections } = useGetAllCollectionsQuery()
   const { collectionSlug } = useParams()
   const { pathname } = useLocation()
+  console.log('re render Navigation')
 
   const listNav = () => {
     return collections?.map((collection) => (
@@ -35,12 +36,20 @@ export const Navigation = memo(() => {
             {/* <!-- NAV --> */}
             <ul className="main-nav nav flex py-4 text-[14px]">
               <li className={`${pathname == RouteEnum.DEFAULT && 'active'}`}>
-                <Link to={RouteEnum.DEFAULT} className="text-header">
+                <Link
+                  reloadDocument={true}
+                  to={RouteEnum.DEFAULT}
+                  className="text-header"
+                >
                   Home
                 </Link>
               </li>
               <li className={`${pathname == RouteEnum.HOTDEALS && 'active'}`}>
-                <Link to={RouteEnum.HOTDEALS} className="text-header">
+                <Link
+                  reloadDocument={true}
+                  to={RouteEnum.HOTDEALS}
+                  className="text-header"
+                >
                   Hot Deals
                 </Link>
               </li>

@@ -32,7 +32,7 @@ export function TopSelling({ collections }: { collections: CollectionType[] }) {
             activeTabSlug == collection.slug && 'active'
           } cursor-pointer`}
         >
-          <a href={`#tab${i + 1}`}>{collection.title}</a>
+          <span>{collection.title}</span>
         </li>
       )
     })

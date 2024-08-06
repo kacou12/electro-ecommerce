@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { useAuth } from '@/hooks/useAuth'
 import { FavoriteActions, useFavoriteContext } from '../favorite-actions'
 import { useToggle } from '@reactuses/core'
+import { useCartLine } from '@/hooks/useCartLine'
 
 export const ProductAction = ({
   product,
@@ -26,7 +27,7 @@ export const ProductAction = ({
     decreaseOrRemoveFromCart,
     increaseQuantityCartLine,
     getCartLineFromProduct: currentCartLine
-  } = useCart()
+  } = useCartLine(product.id)
 
   const [initToggleFavorite, { isSuccess, isLoading }] =
     useToggleFavoriteProductMutation()
@@ -43,10 +44,10 @@ export const ProductAction = ({
     <>
       <section className="flex items-center">
         {/* INCREASE  QUANTITY */}
-        {isInCart({ product }) && (
+        {isInCart() && (
           <div className="increase-qty ">
             <Button
-              onClick={() => decreaseOrRemoveFromCart({ product })}
+              onClick={() => decreaseOrRemoveFromCart()}
               className="w-10 h-10 rounded-md flex justify-center items-center"
             >
               <IoMdRemove className="w-6 h-6" />
@@ -61,9 +62,10 @@ export const ProductAction = ({
           </FavoriteActions>
 
           {/* PRODUCT QUANITY */}
-          {isInCart({ product }) ? (
+          {isInCart() ? (
             <span className="product-qty px-4 font-bold">
-              {currentCartLine({ product })!.quantity}
+              {/* {currentCartLine({ product })!.quantity} */}
+              {currentCartLine!.quantity}
             </span>
           ) : (
             <button
@@ -88,10 +90,10 @@ export const ProductAction = ({
         </div>
 
         {/* DECCREASE  QUANTITY */}
-        {isInCart({ product }) && (
-          <div className="decrease-qty ">
+        {isInCart() && (
+          <div className="decrease-qty">
             <Button
-              onClick={() => increaseQuantityCartLine({ product })}
+              onClick={() => increaseQuantityCartLine()}
               className="w-10 h-10 rounded-md flex justify-center items-center"
             >
               <IoMdAdd className="w-6 h-6 text-white" />
@@ -106,6 +108,7 @@ export const ProductAction = ({
 
 const FavoriteChild = ({ product }: { product: ProductType }) => {
   const favoriteContext = useFavoriteContext()
+  const initToggle = () => {}
   const showIcon = () => {
     const favoriteOn = useFavoriteContext()!.on
     if (favoriteOn) {

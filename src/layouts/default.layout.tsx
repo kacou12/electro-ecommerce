@@ -1,14 +1,15 @@
+import { Breadcrumbs } from '@/components/globals/breadcrumbs.component'
+import { Footer } from '@/components/globals/footer'
+import { Header } from '@/components/globals/header.component'
 import { Navigation } from '@/components/globals/navigation.component'
 import { Newsletter } from '@/components/globals/newsletter.component'
 import { RouteEnum } from '@/routes/route.enum'
 import { Outlet, useLocation } from 'react-router'
 import { ScrollRestoration } from 'react-router-dom'
-import { Breadcrumbs } from './globals/breadcrumbs.component'
-import { Footer } from './globals/footer'
-import { Header } from './globals/header.component'
+
 import { ToastContainer, Bounce } from 'react-toastify'
 
-export default function App() {
+export default function DefaultLayout() {
   const { pathname } = useLocation()
 
   return (

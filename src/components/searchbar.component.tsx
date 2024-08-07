@@ -10,16 +10,15 @@ import {
 } from '@headlessui/react'
 import { useUpdateEffect } from '@reactuses/core'
 import { Button, Spinner } from 'flowbite-react'
-import { Fragment, useState } from 'react'
+import { Fragment, memo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export const SearchBar = () => {
+export const SearchBar = memo(() => {
   const [selectedPerson, setSelectedPerson] = useState('')
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [trigger, { data: paginated, isFetching, isSuccess }] =
     useLazyGetSearchLimitedProductsQuery()
-  // const { data: paginated, isFetching, isSuccess } = result
   const products = paginated?.data
   const count = paginated?.count
   const goSearchPage = () => {
@@ -76,6 +75,7 @@ export const SearchBar = () => {
           onClick={goSearchPage}
           className="rounded-l-none rounded-r-full font-bold px-4"
           size={'sm'}
+          disabled={!!!query}
         >
           Search
         </Button>
@@ -137,4 +137,4 @@ export const SearchBar = () => {
       </section>
     </Combobox>
   )
-}
+})

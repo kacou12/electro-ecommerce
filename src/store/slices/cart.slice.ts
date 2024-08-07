@@ -9,7 +9,7 @@ import {
 
 import { RootState, store } from '..'
 
-const cartsAdapter = createEntityAdapter({
+export const cartsAdapter = createEntityAdapter({
   // Assume IDs are stored in a field other than `cart.id`
   selectId: (cartLine: CartType) => cartLine.id
   // Keep the "all IDs" array sorted based on cart titles

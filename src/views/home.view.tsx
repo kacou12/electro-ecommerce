@@ -30,9 +30,7 @@ function Home() {
         {/* <!-- SECTION COLLECTION --> */}
         <div className="section centerContent">
           <div className="mx-auto  py-8">
-            {/* <!-- row --> */}
             <div className="flex flex-wrap">{showCollections()}</div>
-            {/* <!-- /row --> */}
           </div>
         </div>
         {/* <!-- /SECTION  COLLECTION--> */}

@@ -1,11 +1,11 @@
 import { ProductType } from '@/interfaces/global.interface'
 import { useAppDispatch, useAppSelector } from '@/store'
+import { cartLineSelector } from '@/store/selectors/cart.selector'
 import {
   cartAddLine,
   cartRemoveLine,
   cartsSelectors,
   decreaseQuantity,
-  getCartLine,
   increaseQuantity
 } from '@/store/slices/cart.slice'
 import { shallowEqual } from 'react-redux'
@@ -17,7 +17,7 @@ export const useCartLine = (idCart: string) => {
   const cartLine = useAppSelector((state) =>
     cartsSelectors.selectById(state, idCart)
   )
-  const isInCart = () => !!getCartLine(idCart)
+  const isInCart = () => !!cartLineSelector(idCart)
 
   const addToCart = ({
     product,
@@ -35,7 +35,7 @@ export const useCartLine = (idCart: string) => {
   }
 
   const decreaseOrRemoveFromCart = () => {
-    const currentCartLine = getCartLine(idCart)!
+    const currentCartLine = cartLineSelector(idCart)!
     if (currentCartLine.quantity == 1) {
       return removeCartLine()
     }
@@ -43,14 +43,14 @@ export const useCartLine = (idCart: string) => {
   }
 
   const removeCartLine = () => {
-    const currentCartLine = getCartLine(idCart)!
+    const currentCartLine = cartLineSelector(idCart)!
     dispatch(cartRemoveLine(currentCartLine.id))
     toast.success('Le produit a bien été supprimé du panier', {
       theme: 'colored'
     })
   }
   const increaseQuantityCartLine = () => {
-    const currentCartLine = getCartLine(idCart)!
+    const currentCartLine = cartLineSelector(idCart)!
     dispatch(increaseQuantity(currentCartLine))
     toast.success('La quantité a été augmentée avec success', {
       theme: 'colored'

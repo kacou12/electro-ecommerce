@@ -7,9 +7,12 @@ import { CartDropdown } from '../cart/cart-dropdown'
 import { ProfileDropdown } from '../profile-dropdown'
 import { SearchBar } from '../searchbar.component'
 import { Drawer } from './drawer'
+import { useAppSelector } from '@/store'
 
 export const Header = () => {
-  const { isAuth, favorites } = useAuth()
+  const isAuth = useAppSelector((state) => !!state.auth.userInfo)
+  const favorites = useAppSelector((state) => state.auth.userInfo?.favorites)
+
   return (
     <>
       {/* <!-- HEADER --> */}
@@ -37,7 +40,7 @@ export const Header = () => {
             </ul>
             <ul className="header-links flex space-x-4">
               {/* login */}
-              {!isAuth() && (
+              {!isAuth && (
                 <>
                   <li>
                     <Link to={RouteEnum.LOGIN} className="flex items-center">
@@ -53,7 +56,7 @@ export const Header = () => {
                 </>
               )}
 
-              {isAuth() && <ProfileDropdown></ProfileDropdown>}
+              {isAuth && <ProfileDropdown></ProfileDropdown>}
             </ul>
           </div>
         </div>
@@ -98,9 +101,9 @@ export const Header = () => {
                       <FaRegHeart size={20} />
 
                       <span className="ml-2 text-center">Your Wishlist</span>
-                      {isAuth() && favorites()!.length > 0 && (
+                      {isAuth && favorites!.length > 0 && (
                         <div className="absolute right-4 -top-3 inline-flex items-center justify-center w-5 h-5 text-xs font-thin text-white bg-primary rounded-full ">
-                          {favorites()!.length}
+                          {favorites!.length}
                         </div>
                       )}
                     </a>

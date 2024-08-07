@@ -132,6 +132,7 @@ export const productApi = createApi({
 // auto-generated based on the defined endpoints
 export const {
   useGetNewProductsByCollectionSlugQuery,
+  useLazyGetNewProductsByCollectionSlugQuery,
   useGetProductsByCollectionFilterQuery,
   useGetProductBySlugQuery,
   useGetProductsByCategoryFilterQuery,

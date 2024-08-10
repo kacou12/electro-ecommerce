@@ -13,7 +13,13 @@ export const useFormatQueryParams = ({
 }) => {
   const sortData = selectedFilterBy?.split('_')
 
-  const obj = {
+  const obj: {
+    brandSlugs: string[][]
+    minMax: (string | number)[][] | null
+    sort: string[][] | null
+    page: (string | number)[][]
+    limit: (string | number)[][]
+  } = {
     brandSlugs: selectedBrands.map((brand) => {
       return ['brand.slug', brand]
     }),
@@ -34,7 +40,7 @@ export const useFormatQueryParams = ({
     page: [['_page', page]],
     limit: [['_limit', 9]]
   }
-  for (var propName in obj) {
+  for (let propName in obj) {
     if (
       //@ts-ignore
       obj[propName] == null ||

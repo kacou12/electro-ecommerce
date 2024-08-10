@@ -14,7 +14,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { ProductType } from '@/interfaces/global.interface'
 import { useToggle } from '@reactuses/core'
 import { useAppSelector } from '@/store'
-import { selectFavoriteById } from '@/store/slices/auth.slice'
+import { selectFavoriteById } from '@/store/selectors/auth.selector'
 
 export const FavoriteContext = createContext<{
   toggleFavoriteProduct: () => Promise<void>

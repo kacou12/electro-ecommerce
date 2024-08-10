@@ -63,5 +63,5 @@ export const cartsSelectors = cartsAdapter.getSelectors<RootState>(
   (state) => state.carts
 )
 
-export const getCartLine = (cartId: string) =>
-  cartsSelectors.selectById(store.getState(), cartId) as CartType | undefined
+// export const getCartLine = (cartId: string) =>
+//   cartsSelectors.selectById(store.getState(), cartId) as CartType | undefined
